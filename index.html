@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+  <title>Reef Chinuch Restaurant</title>
+  <script type="text/javascript" src="js/jquery.js" charset="UTF-8"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript" src="js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
+  <script type="text/javascript" src="js/bootstrap-datetimepicker.es.js" charset="UTF-8"></script>
+  <link rel="stylesheet" href="build/css/main.css"/>
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>  
+</head>
+<body id="body_home">
+  <div id="home_page">
+            <header class="page-header" id="header_nav">
+              <a class="navbar-brand" href="/" style="float:right;z-index: 9;position: relative;">
+                <img src="./images/logo-reef-chinuch.png" alt="Logo Reed Chinuch Restaurant" id="reef-chinuch-logo" style="max-width:130px;"/>
+              </a>
+              <nav class="navbar navbar-inverse" id="nav_menu">
+                <div class="container-fluid">
+                  <div class="navbar-header">
+                  <div id="nav_icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                  </div>
+                  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                    <ul class="nav navbar-nav" id="nav_menu_ul">
+                      <li>
+                        <a href="#home" class="btn-menu current_nav">Home</a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#about_us" class="btn-menu">About</a>
+                      </li> 
+                      <li class="dropdown">
+                        <a href="#menu" class=" btn-menu" id="btn_servicios">Menu</a>
+                      </li> 
+                      <li class="dropdown">
+                          <a href="#reservations" class="btn-menu">Reservations</a>
+                        </li>
+                      <li>
+                        <a href="#contact" id="btn_contact" class="btn-menu">Contact</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </nav><!--End  <nav class="navbar navbar-inverse" id="nav_menu"> -->
+            </header><!--End  <header class="page-header" id="header_nav"> -->
+            <section id="home"><!-- Swiper -->
+                <div class="swiper-container" id="slider">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide slide slide-01 ">
+                            <figure class="figure_slide slideshow">
+                                <img src="images/slideshow/comida_tipica_nacional.jpg" class="image_slide img_01" alt="Costa Rican Gastronomy" data-img-id="1"
+                                title="Gastrom&iacute;a de Costa Rica">
+                                <figcaption class="caption_slide caption_slide_01 slideshow " data-caption-id="1" >
+                                  <h2 class="caption_title slideshow caption_title_01 animated">100% Costa Rican Gastronomy</h2>
+                                  <p class="caption_description slideshow caption_description_01 animated">We prepare typical Costa Rican recipes.</p>
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <div class="swiper-slide slide slide-02">
+                            <figure class="figure_slide slideshow">
+                                  <img src="images/slideshow/hamburger.jpg" class="animated image_slide img_02 slideshow" alt="International Gastronomy"  data-img-id="2"
+                                  title="Gastrom&iacute;a Internacional">
+                                  <figcaption class="caption_slide caption_slide_02 slideshow" data-caption-id="2" >
+                                    <h2 class="caption_title slideshow caption_title_02 animated">International Gastronomy</h2>
+                                    <p class="caption_description_02 caption_description slideshow animated">Enjoy the best Burgers.</p>
+                                  </figcaption>
+                            </figure>
+                        </div>
+                        <div class="swiper-slide slide slide-03">
+                                <figure class="figure_slide slideshow">
+                                      <img src="images/slideshow/Meat.jpg" class="image_slide img_03 slideshow animated" alt="The best cuts of Meat"  data-img-id="3"
+                                      title="Los mejores cortes de Carne">
+                                      <figcaption class="caption_slide caption_slide_03 slideshow" data-caption-id="3" >
+                                        <h2 class="caption_title slideshow caption_title_03 animated">We bring you the best cuts of meat.</h2>
+                                        <p class="caption_description slideshow caption_description_03 animated" >Delight your palate, with the best cuts of meat.</p>
+                                      </figcaption>
+                                </figure>
+                        </div>
+                        
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination"></div>
+                    <!-- Add Arrows -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </section><!-- End <section id="inicio"> -->
+            <section id="about_us">
+                <article class="container about_us">
+                        <div class="col-lg-12 content_about_us">
+                               <h1>About Reef Chinuch</h1>
+                                <p>Reef Chinuch Restaurant It is a Costa Rican restaurant located on the road to the Arenal volcano, we have more than 20 years of experience in Culinary Art.</p>
+                                <img src="images/pizza.jpg" id="pizza">
+                                <p>At Reef Chinuch Restaurant we specialize in typical foods from different countries, especially Costa Rica, among which the typical foods of Peru, Canada and Italy also stand out.</p>
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d62771.60598951501!2d-84.76803194174828!3d10.482891685190486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x8fa00f2a6a076cb7%3A0xc9143496451baf5a!2s142%2C+Alajuela%2C+Costa+Rica!3m2!1d10.4828092!2d-84.7330123!5e0!3m2!1sen!2s!4v1470954178498" width="500" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
+                        </div>
+                </article>
+            </section>
+            <section id="menu">
+                <article id="menu-container" class="container">
+                  <h1>Menu</h1>
+                  <div class="row">
+                    <div class="col-xs-5 col-md-4" > 
+                      <a href="#">
+                            <h4>Appetizers</h4>
+                            <figure>
+                                <img src="images/icon_entrees.png" class="icon_service" alt="Appetizers"/>
+                            </figure>
+                      </a>
+                    </div>
+                    <div class="col-xs-5 col-md-4">
+                      <a href="#">
+                            <h4>Strong Dishes</h4>
+                        <figure>
+                          <img src="images/icon_lunch.jpg" class="icon_service" alt="Strong Dishes"/>
+                        </figure>
+                      </a>
+                    </div>
+                    <div class="col-xs-5 col-md-4">
+                      <a href="#">
+                            <h4>Desserts</h4>
+                        <figure>
+                            <img src="images/icon_dessert.png" class="icon_service" alt="Desserts"/>
+                        </figure>
+                      </a>
+                    </div>
+                      <div class="col-xs-5 col-md-4 last-col">
+                          <a href="#">
+                              <h4>Drinks</h4>
+                          <figure>
+                              <img src="images/icon_drinks.jpg" class="icon_service" alt="Drinks"/>
+                          </figure>
+                        </a>  
+                      </div>
+                  </div>
+                </article>
+            </section> 
+            <section id="reservations">
+                  <article class="container reservations">
+                      <div class="panel panel-primary">
+                          <div class="panel-heading">
+                              <header class="container" id="reservacion_header">
+                                      <h4 id="reservation_title">Book Here</h4>
+                              </header>
+                          </div><!--End <div class="panel-heading">-->
+                          <div class="panel-body">
+                            <article class="container reservation_form">
+                              <form role="form" id="reservation_form" class="col-lg-12">
+                                      <div class="form-group">
+                                          <label class="control-label" for="name_reservacion">
+                                            <span class="required">*</span>Full Name:</label>
+                                          <input type="text" class="form-control name_reservacion"
+                                          placeholder="Full Name"
+                                            id="name_reservacion" >
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="control-label" for="telefono_reservacion">
+                                            <span class="required">*</span>Telephone:</label>
+                                          <input type="tel" class="form-control telefono_reservacion"
+                                          placeholder="Your telephone number"
+                                          id="telefono_reservacion" >
+                                      </div>
+                                      <div class="form-group">
+                                            <label class="control-label" for="cantidad_reservacion"><span class="required">*</span> 
+                                              Persons:</label>
+                                            <input type="number" class="form-control cantidad_reservacion"
+                                            placeholder="Quantity of Personas"
+                                            id="cantidad_reservacion" name="cantidad_reservacion">
+                                      </div>
+                                      <div class="form-group">
+                                            <label class="control-label" for="fecha_reservacion">
+                                            <span class="required">*</span> Date and Hour:</label>
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                  <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input class="form-control datepicker"
+                                                id="fecha_reservacion" name="fecha_reservacion"
+                                                placeholder="Date and Hour" type="text"/>
+                                            </div>
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="control-label" for="email_reservacion">
+                                            <span class="required">*</span>
+                                            Email:</label>
+                                          <input type="email" class="form-control email_reservacion"
+                                          placeholder="Your Email"
+                                          id="email_reservacion" name="email_reservacion">
+                                      </div>
+                                      <div class="form-group">
+                                          <label for="direccion_exacta" class="control-label">
+                                          Comment:</label>
+                                          <textarea class="form-control"
+                                          placeholder="Your Comments"
+                                          rows="5" id="reservation_comment"></textarea>
+                                      </div>
+                                      <button type="submit" class="btn btn-primary" id="btn_reservar">Reserve</button>
+                              </form>
+                            </article><!--End <article class="container reservation_form"> -->
+                          </div><!--End <div class="panel-body"> --> 
+                      </div><!--End <div class="panel panel-primary">-->
+                  </article><!--End  <article class="container reservations"> -->
+            </section><!--End <section id="reservations">--> 
+            <section id="contact">
+              <article class="container contact_form">
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <header class="header-panel">
+                      <h4>Contact Us</h4>
+                    </header>
+                  </div>
+                  <div class="panel-body">
+                      <form role="form" id="contact_form" class="col-lg-12">
+                          <div class="form-group">
+                              <label for="name_contact" class="control-label"> 
+                                <span class="required">*</span>Full Name:</label>
+                              <input type="text" class="form-control name_contact"
+                              placeholder="Your full name."
+                              id="name_contact" >
+                          </div>
+                          <div class="form-group" >
+                              <label for="telephone_contact" class="control-label">
+                                <span class="required">*</span>Telephone:</label>
+                              <input type="tel" placeholder="Your telephone number"
+                              class="form-control telephone_contact" id="telephone_contact" >
+                          </div>
+                          <div class="form-group">
+                              <label for="email_contact" class="control-label">
+                                <span class="required">*</span>Email:</label>
+                              <input type="email" class="form-control email_contact"
+                              id="email_contact" name="email_contact"
+                                placeholder="Your Email">
+                          </div>
+                          <div class="form-group">
+                              <label for="comments_contact" class="control-label">
+                                <span class="required">*</span>Comments:</label>
+                              <textarea class="form-control" rows="5" id="comments_contact"
+                              placeholder="Your Comments"></textarea>
+                          </div>
+                          <button type="submit" class="btn btn-primary" id="btn_enviar">Send</button>
+                        </form>
+                  </div>
+                </div>        
+              </article><!--End <article class="container contact_form"> -->
+            </section><!--End  <section id="contact">-->
+        <div class="modal" id="modal_dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close btn_close"
+                      data-dismiss="modal"
+                      aria-hidden="true">&times;</button>
+                      <h1 class="modal-title" id="modal_title"></h1>
+                    </div>
+                    <div class="modal-body" id="modal_content">
+                    </div>
+                    <div class="modal-footer" id="buttons_ctrl">
+                      <button type="button" class="btn btn-primary btn_close"
+                      data-dismiss="modal" id="close_modal">Cerrar</button>
+                    </div>
+                  </div>
+                </div>
+        </div><!--End <div class="modal" id="modal_dialog"> -->
+  </div>
+ </body>
+  <script type="text/javascript" src="js/bootstrap-datepicker.js" charset="UTF-8" data-defer="defer"></script>
+  <script src="js/swiper.jquery.min.js" data-defer="defer"></script>
+  <script data-defer="defer">
+    $('#nav_icon').on('click',function(){
+      $(this).toggleClass('open');
+      $('#nav_menu_ul').fadeToggle('fast',function(){});
+      $('.collapse').fadeToggle('slow',function(){});
+      /* if($windowWidth<=1024 || $documentWidth<=1024){
+          $('#nav_menu').toggleClass('menu_tablet_opened');
+      } */
+      $('body').toggleClass('opened_nav');
+    });
+    $(".nav.navbar-nav a").on('click',function(){
+      $(".nav.navbar-nav a").each(function(){
+        $(this).removeClass('current_nav')
+      })
+      $(this).addClass('current_nav')
+    })
+    /*
+    $('ul#nav_menu_ul li').on('click',function(){
+        if($windowWidth<=1024 || $documentWidth<=1024 && $('#nav_icon').is('.open')  && $('#nav_menu').is('.menu_tablet_opened')){
+          $('#nav_menu').toggleClass('menu_tablet_opened');
+          $('#nav_icon').toggleClass('open');
+          $('.collapse').fadeToggle('slow',function(){});
+          $('#nav_menu_ul').fadeToggle('fast',function(){});
+      }
+    });
+    $('ul.dropdown-menu li a').on('click',function(){
+        if($windowWidth<=1024 || $documentWidth<=1024 && $('#nav_icon').is('.open') 
+          && $('#nav_menu').is('.menu_tablet_opened')){
+          $('.collapse').fadeToggle('slow',function(){});
+          $('#nav_menu_ul').fadeToggle('fast',function(){});
+      }
+    });
+    */
+    $(".btn-menu").click(function() {
+        $('html, body').animate({
+            scrollTop:$($(this).attr('href')).offset().top
+        }, 1600);
+        console.log($(this).attr('href'));
+        
+    });
+    $(document).ready(function(){
+      $('.datepicker').datetimepicker();
+      $('.caption_slide').each(function( index ) {
+        $( this ).removeClass('active animated fadeInLeft');
+      });
+      setTimeout(() => {
+        $('.caption_slide').addClass('active animated fadeInLeft')
+      }, 800);
+    })
+    var swiper = new Swiper('.swiper-container', {
+      pagination: '.swiper-pagination',
+      nextButton: '.swiper-button-next',
+      prevButton: '.swiper-button-prev',
+      slidesPerView: 1,
+      paginationClickable: true,
+      // spaceBetween: 30, 
+      speed: 600,
+      loop: true,
+      // spaceBetween: 30,
+      // centeredSlides: true,
+      autoplay:8500,
+      autoplayDisableOnInteraction: false
+  });
+  swiper.on('transitionStart',function(){   
+    $('.caption_slide').each(function( index ) {
+      $( this ).removeClass('active animated');
+    });
+  });
+  swiper.on('transitionEnd',function(){
+    setTimeout(() => {
+      $('.caption_slide').each(function( index ) {
+          $(this).addClass('active animated fadeInLeft')
+      })
+    }, 300);
+  }); 
+  swiper.on('touchStart sliderMove',function(){     
+    $('.caption_slide').each(function( index ) {
+      $( this ).removeClass('active animated fadeInLeft');
+    });
+  }); 
+  </script>
+</html>
