@@ -3,11 +3,11 @@ require 'compass/import-once/activate'
 # Set this to the root of your project when deployed:
 # @see http://compass-style.org/help/documentation/configuration-reference/
 http_path = "/"
-css_dir = "build/css"
-sass_dir = "sass"
-images_dir = "/images"
-javascripts_dir = "js"
-fonts_path = "build/fonts"  
+css_dir = "public/css"
+sass_dir = "public/sass"
+images_dir = "public/images"
+javascripts_dir = "public/js"
+fonts_path = "public/fonts"  
 # You can select your preferred output style here (can be overridden via the command line):
 # output_style = :expanded or :nested or :compact or :compressed
 output_style = :compressed
