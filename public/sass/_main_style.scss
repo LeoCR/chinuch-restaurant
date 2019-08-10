@@ -63,11 +63,6 @@ span.required { color: darkred; font-weight: bold; font-size: 18px; }
 #nav_menu, ul#nav_menu_ul { 
   width: 100%; 
   border: none; 
-  transition: all ease-in-out 0.3s;
-  -webkit-transition: all ease-in-out 0.3s;
-  -moz-transition: all ease-in-out 0.3s;
-  -o-transition: all ease-in-out 0.3s;
-  -ms-transition: all ease-in-out 0.3s;
 }
 .navbar-inverse .navbar-nav > li > a { color: #fff; font-weight: 400; font-size: 17px; }
 .current_slide { z-index: 99999 !important; }
@@ -115,6 +110,13 @@ section#servicio_express, #menu, #catalogo_de_platos_fuertes, #catalogo_de_desay
   position: relative;
   margin: 2%;
 }
+#container-menu {
+	background: white;
+	float: left;
+  position: relative;
+  width: 100%;
+  padding: 0 2%;
+}
 .content_about_us {
   background: white;
   padding: 2%;
@@ -123,10 +125,13 @@ section#servicio_express, #menu, #catalogo_de_platos_fuertes, #catalogo_de_desay
   position: relative;
 }
 #menu-container {
-  background: #fff;
-  padding: 3%;
-  max-width: 860px;
+  width: 100%;
   margin-top: 7%;
+}
+.back-container{
+  width: 100%;
+  position: relative;
+  float: left;
 }
 .icon_service {
   max-width: 235px;
@@ -273,4 +278,61 @@ p ,.navbar-inverse .navbar-nav > li > a,h4,label{font-family: 'Open Sans', sans-
   background: linear-gradient(to bottom,  #ffa347 0%,#fc8c1b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffa347', endColorstr='#fc8c1b',GradientType=0 ); /* IE6-9 */
   color: #000 !important;border-color: #000 !important;
+}
+.navbar-brand{
+  height: 0px !important;
+  padding: 0px !important;
+}
+.anchor_menu{
+  width: auto;
+  height: auto;
+  float: left;
+}
+.menu-body.menu-left.menu-white {
+	width: 42%;
+  float: left;
+  position: relative;
+  margin: 10px 0;
+  min-height: 210px;
+  height: auto;
+}
+.menu-details {
+	float: right;
+	position: relative;
+	max-width: 200px;
+}
+.menu-title{
+  h5{
+    position: relative ;
+    color: #000 ;
+    background: none;
+  }
+}
+.menu-thumbnail {
+	position: relative;
+	float: left;
+	width: auto;
+}
+.menu-thumbnail{
+  img{
+    max-width: 200px;
+  }
+}
+.btn-add-to-cart,.btn.button{
+  background: #f9b868;
+  background: -moz-linear-gradient(top,  #f9b868 0%, #f28a21 100%); 
+  background: -webkit-linear-gradient(top,  #f9b868 0%,#f28a21 100%);
+  background: linear-gradient(to bottom,  #f9b868 0%,#f28a21 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9b868', endColorstr='#f28a21',GradientType=0 ); 
+  color: #000 !important;
+  border:1px solid #f9b868 !important;
+  &:active,&:hover{
+    background: #f9c268; /* Old browsers */
+    background: -moz-linear-gradient(top,  #f9c268 0%, #efc22d 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #f9c268 0%,#efc22d 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #f9c268 0%,#efc22d 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9c268', endColorstr='#efc22d',GradientType=0 ); /* IE6-9 */
+    color: #000 !important;
+    border:1px solid #f9b868 !important;
+  }
 }
