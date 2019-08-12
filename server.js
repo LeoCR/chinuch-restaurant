@@ -12,9 +12,108 @@ import App from './src/containers/App';
 import {Provider} from "react-redux";
 import store from "./src/store"; 
 import { StaticRouter } from "react-router";
+const { appendUniversalPortals } = require("react-portal-universal/lib/server");
+const FacebookStrategy= require('passport-facebook'),
+GoogleStrategy = require( 'passport-google-oauth2' ).Strategy,
+compression = require('compression'),
+methodOverride = require('method-override'),
+db = require(path.resolve(__dirname+'/private/app/db/config/config.js')),
+app = express(),
+User = db.user,
+jwt = require('jsonwebtoken');
+var cookieParser = require('cookie-parser'); 
 
-
-let app= express();
+var secretKey='943rjkhsOA)JAQ@#';
+var fbOpts={
+  clientID: '1000175700179103',
+  clientSecret: 'a9a5309580a601253cd18a4d23bfdf26',
+  callbackURL: "https://localhost:48452/auth/facebook/callback",
+  enableProof: true,
+  profileFields: ['id', 'displayName', 'photos', 'emails','first_name', 'last_name']
+};
+var googleOpts={
+    clientID:"309759265514-0eq8pofu7m5066l0bhbctsf1fc5j0t6q.apps.googleusercontent.com",
+    clientSecret:"-K862ptYDMCBVqjY9lW7n406",
+    callbackURL: "/auth/google/callback",
+    passReqToCallback : true
+};
+var googleCallback=function(request, accessToken, refreshToken, profile, done) {
+  console.log('profile GoogleStrategy');
+  var email=profile.email;
+  console.log(profile);
+  if(email!==''||email!==undefined){
+    var dateTime = new Date();
+    User.findOne({ where: {email} }).then(user => {
+      if(user){
+        User.update({
+          last_login: dateTime,
+          provider:'google'
+        }, 
+        { where: {email:email}}).then(userUpdated => {		
+          // Send created customer to client
+          console.log('userUpdated');
+          console.log(userUpdated);
+        }); 
+      }
+      else{
+        User.create({  
+          username: profile.displayName,
+          firstname:profile.name.givenName,
+          lastname:profile.name.familyName,
+          provider:'google',
+          id_user:profile.id,
+          email:email,
+          created_at:dateTime,
+          updated_at:dateTime
+        }).then(userCreated => {		
+          console.log('userCreated');  
+          console.log(userCreated);
+        }); 
+      }
+    });
+  }
+  done(null, profile);
+};
+var fbCallback=function(accessToken, refreshToken, profile, done) {
+  console.log('accessToken', accessToken);
+  console.log('refreshToken', refreshToken);
+  console.log('profile',profile);
+  var email=profile.emails[0].value;
+  console.log('profile.emails[0].value '+email);
+  if(email!==''||email!==undefined){
+    var dateTime = new Date();
+    User.findOne({ where: {email} }).then(user => {
+      if(user){
+        User.update({
+          provider:'facebook',
+          last_login: dateTime
+        }, 
+        { where: {email:email}}).then(userUpdated => {		
+          // Send created customer to client
+          console.log('userUpdated');
+          console.log(userUpdated);
+        }); 
+      }
+      else{
+        User.create({  
+          username: profile._json.name,
+          firstname:profile._json.firstname,
+          lastname:profile._json.last_name,
+          provider:'facebook',
+          id_user:profile.id,
+          email:email,
+          created_at:dateTime,
+          updated_at:dateTime
+        }).then(userCreated => {		
+          console.log('userCreated');  
+          console.log(userCreated);
+        }); 
+      }
+    })
+  } 
+  done(null, profile);
+};
+var models = require(path.resolve(__dirname+"/private/app/db/config/config.js"));
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()){
       return next();
@@ -23,15 +122,21 @@ function isLoggedIn(req, res, next) {
       res.redirect('/');
   }
 }
-var models = require(path.resolve(__dirname+"/private/app/db/config/config.js"));
 app.use(cors());
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 // For Passport
 app.use(session({
-  secret: 'dshf48438975',
+  secret: secretKey,
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
+  maxAge: Date.now() + (30 * 86400 * 1000)
 })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
@@ -41,8 +146,28 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
-
-app.get(['/','/desserts','/drinks','/main-courses'], function (req, res) {
+passport.use(new FacebookStrategy(fbOpts,fbCallback)); 
+passport.use(new GoogleStrategy(googleOpts,googleCallback));
+app.get('/auth/google/callback',
+  passport.authenticate('google', { 
+    scope:[ 'profile','https://www.googleapis.com/auth/userinfo.profile',
+    'https://www.googleapis.com/auth/userinfo.email'],
+    successRedirect: '/user',
+    failureRedirect: '/'
+  }
+));
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { 
+    successRedirect: '/user',
+    failureRedirect: '/',scope: ["email"] }
+));
+app.use(compression());
+app.use(methodOverride());
+app.use(function(err, req, res, next) {
+  res.send('An error occurs: '+err);
+});
+app.set('view engine', '.html');
+app.get(['/','/desserts','/drinks','/main-courses','/checkout','/appetizers'], function (req, res) {
     var context = {};
     const app = ReactDOMServer.renderToString(
       <StaticRouter location={req.url} context={context}>
@@ -59,10 +184,11 @@ app.get(['/','/desserts','/drinks','/main-courses'], function (req, res) {
         }
         var tempData=data;
         tempData.replace('<article id="menu-container"></article> ', `<article id="menu-container">${app}</article>`)
-        return res.send(tempData);
+        const markup   = appendUniversalPortals(tempData);
+        return res.send(markup);
     });
 });
-app.get('/validate/authentication',function(req,res){
+app.get('/api/validate/authentication',function(req,res){
   if (req.isAuthenticated()){
     res.json({isAuthenticated:true});
   }
@@ -89,13 +215,27 @@ const httpsOptions = {
   key: fs.readFileSync('/Users/leo/Documents/chinuch-restaurant/private/security/server.key'),
   cert: fs.readFileSync('/Users/leo/Documents/chinuch-restaurant/private/security/server.crt')
 }
-require(path.resolve(__dirname+'/private/app/route/user.route.js'))(app,path,isLoggedIn);
-require(path.resolve(__dirname+'/private/app/route/drink.route.js'))(app,path);
-require(path.resolve(__dirname+'/private/app/route/dish.route.js'))(app,path);
 require(path.resolve(__dirname+'/private/app/route/public.route.js'))(app,express,path,isLoggedIn);
 require(path.resolve(__dirname+'/private/app/route/private.route.js'))(app,express,path,isLoggedIn);
+require(path.resolve(__dirname+'/private/app/route/dish.route.js'))(app,path);
+require(path.resolve(__dirname+'/private/app/route/user.route.js'))(app,path,isLoggedIn);
+require(path.resolve(__dirname+'/private/app/route/drink.route.js'))(app,path);
 require(path.resolve(__dirname+'/private/app/route/ingredient.route.js'))(app,path);
-require(path.resolve(__dirname+'/private/app/route/auth.route.js'))(app,passport,path);
+//load passport strategies
+require(path.resolve(__dirname+'/private/app/db/config/passport/passport.js'))(passport, models.user);
+require(path.resolve(__dirname+'/private/app/route/auth.route.js'))(app,passport,path,User,jwt); 
+
+app.get('/logout',function(req,res){
+  req.session.destroy();
+  req.logout();
+  res.redirect('/');
+})
+//Sync Database
+models.sequelize.sync().then(function() {
+  console.log('https://localhost:48452 works')
+}).catch(function(err) {
+  console.log(err, "Something went wrong with the Database Update!")
+});
 https.createServer(httpsOptions,app, (req, res) => {
   res.set({
     'Access-Control-Allow-Credentials': true,

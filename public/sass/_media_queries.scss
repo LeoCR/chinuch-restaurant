@@ -129,9 +129,15 @@ form#contact_form { margin: 0 auto; }
     margin-top: 2%;
   }
 }
-@media screen and (max-width: 980px) { 
+@media screen and (max-width: 1050px) { 
   .menu-body.menu-left.menu-white{
-    width:65%;
+    width:75%;
+  }
+  .menu-details {
+    float: left;
+    position: relative;
+    max-width: 200px;
+    margin-left: 7%;
   }
   .about_us p{
     float:left;

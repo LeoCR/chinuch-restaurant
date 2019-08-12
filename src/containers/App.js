@@ -3,12 +3,90 @@ import {connect} from 'react-redux';
 import {fetchMainCourses,fetchAppetizers,fetchDesserts,fetchDrinks} from '../actions/menuActions';
 import { Route ,Switch,Link} from "react-router-dom";
 import Desserts from '../components/Desserts';
+import Appetizers from '../components/Appetizers';
+import MainCourses from '../components/MainCourses';
+import Drinks from '../components/Drinks';
+import ViewDish from '../components/view/ViewDish';
+import ViewDrink from "../components/view/ViewDrink";
+import CartContainer from "./CartContainer";
+import {addToCart} from '../actions/cartActions';
 class App extends React.Component {
   state={
     showModal:'showAddForm',
     product:null,
     hasOrders:false,
     totalOrders:0
+  }
+  setAddForm=()=>{
+    $('body').removeClass('signup');
+    $('body').toggleClass('modal-opened');
+    this.setState({
+      showModal:'showAddForm'
+    })
+  }
+  setShowLogin=()=>{
+    $('body').removeClass('signup');
+    console.log('setShowLogin');
+    this.setState({
+      showModal:'showLogin'
+    })
+  }
+  setShowSignUp=()=>{
+    $('body').addClass('signup');
+    console.log('setShowSignUpForm');
+    this.setState({
+      showModal:'showSignUpForm'
+    })
+  }
+  setShowUserDetails=()=>{
+    $('body').removeClass('signup');
+    console.log('setShowUserDetails');
+    this.setState({
+      showModal:'showUserDetails'
+    })
+  }
+  setShowOrders=()=>{
+    $('body').removeClass('signup');
+    this.setState({
+      showModal:'showBasket'
+    });
+    this.calculateOrders();
+    $('.modal').css({'display':'block'});
+  }
+  setShowUserCreated=()=>{
+    $('body').removeClass('signup');
+    this.setState({
+      showModal:'showUserCreated'
+    });
+  }
+  calculateOrders=()=>{
+    var totalQuantity=0;
+    try {
+      this.props.orders.orders.forEach(function(element) {
+          totalQuantity+=element.quantity;
+      });
+    } 
+    catch (error) {
+      console.log('An error occurs in App.calculateOrders');
+      console.error(error);
+    }
+    finally{
+      if(totalQuantity<10){
+        this.setState({
+          totalOrders:'0'+totalQuantity
+        })
+      }
+      else{
+        this.setState({
+          totalOrders:totalQuantity
+        })
+      }
+    }
+    if(totalQuantity>=1){
+        this.setState({
+          hasOrders:true
+        });
+    }
   }
   addProductToCart=(product)=>{
     var productObject=Object.assign({currency:'USD'},product);
@@ -24,15 +102,22 @@ class App extends React.Component {
     });
     this.calculateOrders();
   }
+  addToCart=(quantity)=>{
+      var orderObject = Object.assign({quantity: quantity}, this.state.product);
+      this.props.addToCart(orderObject);
+      this.calculateOrders();
+  }
   componentDidMount(){
     this.props.fetchAppetizers();
     this.props.fetchMainCourses();
     this.props.fetchDesserts();
     this.props.fetchDrinks();
+    this.calculateOrders();
   }
   render() {
     return (
-      <div id="container-menu">
+      <React.Fragment>
+        <div id="container-menu">
           <Switch>
             <Route path='/' exact render={()=>
                 <React.Fragment>
@@ -74,10 +159,43 @@ class App extends React.Component {
                 </React.Fragment>
             }/>
             <Route path="/desserts" exact render={()=><React.Fragment>
-                <Desserts Desserts={this.props.desserts} title="Desserts"/>
+                <Desserts Desserts={this.props.desserts} title="Desserts" 
+                  addProductToCart={this.addProductToCart} 
+                  setAddForm={this.setAddForm}/>
             </React.Fragment>}/>
+            <Route path="/appetizers" exact render={()=><React.Fragment>
+                <Appetizers Appetizers={this.props.appetizers} title="Appetizers" 
+                  addProductToCart={this.addProductToCart} 
+                  setAddForm={this.setAddForm}/>
+            </React.Fragment>}/>
+            <Route path="/main-courses" exact render={()=><React.Fragment>
+                <MainCourses MainCourses={this.props.mainCourses} title="Main Courses" 
+                  addProductToCart={this.addProductToCart} 
+                  setAddForm={this.setAddForm}/>
+            </React.Fragment>}/>
+            <Route path="/drinks" exact render={()=><React.Fragment>
+                <Drinks Drinks={this.props.drinks} title="Drinks" 
+                  addProductToCart={this.addProductToCart} 
+                  setAddForm={this.setAddForm}/>
+            </React.Fragment>}/>
+            <Route path='/appetizers/:id' exact component={ViewDish}/>
+            <Route path='/desserts/:id' exact component={ViewDish}/>
+            <Route path='/main-courses/:id' exact component={ViewDish}/>
+            <Route path='/drinks/:id' exact component={ViewDrink}/>
           </Switch>
-      </div>
+        </div>
+        <CartContainer 
+            setShowUserCreated={this.setShowUserCreated}
+            setShowOrders={this.setShowOrders}
+            setShowLogin={this.setShowLogin}
+            setShowUserDetails={this.setShowUserDetails}
+            setShowSignUp={this.setShowSignUp} 
+            showModal={this.state.showModal} 
+            hasOrders={this.state.hasOrders}
+            totalOrders={this.state.totalOrders}
+            addToCart={this.addToCart} 
+            calculateOrders={this.calculateOrders}/>
+      </React.Fragment>
     );
   }
 }
@@ -86,7 +204,8 @@ const mapStateToProps=(state)=>{
     mainCourses:state.menu.mainCourses,
     desserts:state.menu.desserts,
     appetizers:state.menu.appetizers,
-    drinks:state.menu.drinks
+    drinks:state.menu.drinks,
+    orders:state.orders
   }
 }
-export default connect(mapStateToProps,{fetchMainCourses,fetchAppetizers,fetchDesserts,fetchDrinks})(App)
+export default connect(mapStateToProps,{fetchMainCourses,fetchAppetizers,fetchDesserts,fetchDrinks,addToCart})(App)

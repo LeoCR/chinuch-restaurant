@@ -7,5 +7,6 @@ module.exports = function(app,path,isLoggedIn) {
     app.get('/api/user/show/:id',user.findById);
     app.put('/api/user/update/:id',user.update);
     app.post('/api/user/add/',user.create)
+    app.get('/api/user/info',user.getUser);
     
 }

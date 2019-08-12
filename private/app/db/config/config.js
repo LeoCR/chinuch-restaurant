@@ -22,7 +22,7 @@ const db = {};
 
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
-db.reef_user=require(path.resolve(__dirname+'/../model/user.model.js'))(sequelize, Sequelize);
+db.user=require(path.resolve(__dirname+'/../model/user.model.js'))(sequelize, Sequelize);
 db.dish=require(path.resolve(__dirname+'/../model/dish.model.js'))(sequelize, Sequelize);
 db.drink=require(path.resolve(__dirname+'/../model/drink.model.js'))(sequelize, Sequelize);
 db.ingredient=require(path.resolve(__dirname+'/../model/ingredient.model.js'))(sequelize, Sequelize);

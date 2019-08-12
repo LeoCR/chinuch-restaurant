@@ -2,7 +2,9 @@ module.exports = function(sequelize, Sequelize) {
     var User = sequelize.define('reef_user', {
         id: {
             primaryKey: true,
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            allowNull: false,
+            autoIncrement: true
         },
         firstname: {
             type: Sequelize.STRING,

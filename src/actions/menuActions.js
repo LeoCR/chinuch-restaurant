@@ -1,5 +1,23 @@
-import {FETCH_MAIN_COURSES,FETCH_APPETIZERS,FETCH_DESSERTS,FETCH_DRINKS} from "../constants/menuTypes";
+import {FETCH_MAIN_COURSES,FETCH_APPETIZERS,
+    FETCH_DESSERTS,FETCH_DRINKS,FETCH_DRINK,
+    FETCH_DISH,FETCH_INGREDIENTS
+} from "../constants/menuTypes";
 import api from "../apis/api";
+
+export const fetchDish=id=>async dispatch=>{
+    const response = await api.get('/api/dish/show/'+id);
+    dispatch({
+        type:FETCH_DISH,
+        payload:response.data
+    });
+}
+export const fetchDrink=id=>async dispatch=>{
+    const response = await api.get('/api/drink/show/'+id)
+    dispatch({
+        type:FETCH_DRINK,
+        payload:response.data
+    });
+}
 export const fetchMainCourses=()=>async dispatch=>{
     const response = await api.get('/api/get/main-courses');
     dispatch({
@@ -27,4 +45,11 @@ export const fetchDrinks=()=>async dispatch=>{
         type:FETCH_DRINKS,
         payload:response.data
     });
+}
+export const fetchIngredients=(id)=>async dispatch=>{
+    const response = await api.get(`/api/dish/ingredients/${id}`);
+    dispatch({
+        type:FETCH_INGREDIENTS,
+        payload:response.data
+    })
 }

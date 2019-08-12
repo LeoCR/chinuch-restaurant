@@ -1,6 +1,6 @@
 const path = require('path'), 
 db = require(path.resolve(__dirname+'/../config/config.js')),
-User = db.reef_user;
+User = db.user;
 var bCrypt = require('bcrypt-nodejs');
 exports.findAll=(req,res)=>{
     User.findAll().then(user => {
@@ -62,6 +62,33 @@ exports.create=(req,res)=>{
     }).then(user => {	
           res.status(200).send(user);
     }).catch(err => {
-      res.status(500).json({msg: "An error occurred.", details: err});
+      res.json({msg: "An error occurred.", details: err});
   });
+}
+exports.getUser=(req,res)=>{
+    if(req.user){
+        if(req.user._json){
+            User.findOne({ where: {email: req.user.emails[0].value} }).then(user => {
+                if(user){
+                    res.send(user)
+                }
+                else{
+                    res.json({user:null});
+                }
+            }) 
+        }
+        else{
+            User.findOne({ where: {email: req.user.email} }).then(user => {
+                if(user){
+                    res.send(user)
+                }
+                else{
+                    res.json({user:null});
+                }
+            }) 
+        }
+    }
+    else{
+      res.json({user:null})
+    }
 }

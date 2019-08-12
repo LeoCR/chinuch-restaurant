@@ -1,15 +1,12 @@
 import React , {Component} from "react";
 import $ from 'jquery';
-import history from '../history';
 import {Link} from "react-router-dom";
 class Desserts extends Component{  
     addDessert=(dessert)=>{
         this.props.setAddForm();
         this.props.addProductToCart(dessert);
     }
-    goToMenu=(e,id)=>{
-        e.preventDefault();
-        history.push('/saucers/'+id);
+    goToMenu=()=>{
         $('html,body').animate({
             scrollTop: $("#menu").offset().top-90
         }, 'slow');
@@ -44,7 +41,7 @@ class Desserts extends Component{
                                     <p>{dessert.description.substr(0,80)+'...'}</p>
                                 </div>
                                 <button type="button" className="btn btn-add-to-cart" onClick={()=>{this.addDessert(dessert)}}><i className="fa fa-cart-plus fa-3"></i>Add</button>
-                                <button type="button" onClick={(e)=>this.goToMenu(e,dessert.id)} className="btn btn-success"><i className="fa fa-eye fa-3" aria-hidden="true"></i>Read More</button>
+                                <Link onClick={()=>this.goToMenu()} to={`/desserts/${dessert.id}`} className="btn btn-success"><i className="fa fa-eye fa-3"></i>Read More</Link>
                             </div>
                         </div>
             )}
