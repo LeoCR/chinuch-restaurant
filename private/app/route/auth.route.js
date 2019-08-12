@@ -24,10 +24,7 @@ module.exports = function(app, passport,path,User,jwt) {
             if (err) { 
                 return next(err);
             }
-            else{
-                return res.send(user)
-            }
-            /* jwt.sign({user},secretKey,(err,token)=>{
+            jwt.sign({user},secretKey,(err,token)=>{
                 if(err){
                     return res.send({msg:"An error occurs on /api/login jwt.sign(): ",error:err});
                 }
@@ -35,7 +32,7 @@ module.exports = function(app, passport,path,User,jwt) {
                     res.cookie("userData", {user,token}); 
                     return res.send({user,token});
                 }
-            }); */
+            }); 
         });
     })(req, res, next);
   });
