@@ -46,7 +46,7 @@ class LoginForm extends React.Component{
                         })
                         $('.error-password').css('display','block');
                     }
-                    else if(res.data.info.message==='Email does not exist'){
+                    if(res.data.info.message==='Email does not exist'){
                         _this.setState({
                             emailError:'Email does not exist.'
                         })
@@ -77,18 +77,6 @@ class LoginForm extends React.Component{
             });
             $('.error-password').css('display','block');
         }
-        /* if(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/.test(currentValue)){
-            this.setState({
-                passwordError:''
-            });
-            $('.error-password').css('display','none');
-        }
-        else{
-            this.setState({
-                passwordError:'Minimun 1 number,1 lowercase ,1 uppercase and 6 characters'
-            });
-            $('.error-password').css('display','block');
-        } */
         this.setState({
             password:currentValue
         });
