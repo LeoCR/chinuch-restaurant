@@ -12,6 +12,7 @@ import App from './src/containers/App';
 import {Provider} from "react-redux";
 import store from "./src/store"; 
 import { StaticRouter } from "react-router";
+
 const { appendUniversalPortals } = require("react-portal-universal/lib/server");
 const FacebookStrategy= require('passport-facebook'),
 GoogleStrategy = require( 'passport-google-oauth2' ).Strategy,
@@ -170,11 +171,11 @@ app.set('view engine', '.html');
 app.get(['/','/desserts','/drinks','/main-courses','/checkout','/appetizers'], function (req, res) {
     var context = {};
     const app = ReactDOMServer.renderToString(
-      <StaticRouter location={req.url} context={context}>
-        <Provider store={store}>
-          <App /> 
-        </Provider>
-      </StaticRouter>
+        <StaticRouter location={req.url} context={context}>
+          <Provider store={store}>
+            <App /> 
+          </Provider>
+        </StaticRouter>
     );
     const indexFile = path.resolve(__dirname+'/build/index.html');
     fs.readFile(indexFile, 'utf8', (err, data) => {

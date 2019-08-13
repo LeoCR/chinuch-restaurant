@@ -1,6 +1,5 @@
 import React , {Component} from "react";
 import $ from 'jquery';
-import history from '../history';
 import {Link} from "react-router-dom";
 class Drinks extends Component{
     addDrink(idDrink){

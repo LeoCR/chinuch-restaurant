@@ -1,9 +1,14 @@
-import {ADD_TO_CART,DELETE_FROM_CART,UPDATE_ITEM_UNITS,SHOW_ORDERS} from "../constants/cartTypes";
+import {ADD_TO_CART,DELETE_FROM_CART,UPDATE_ITEM_UNITS,SHOW_ORDERS,SET_ORDERS} from "../constants/cartTypes";
 const initialState = {
     orders: []
 };
 export default function(state = initialState, action) {
     switch(action.type) {
+        case SET_ORDERS:
+            return{
+                ...state,
+                orders:action.payload
+            }
         case ADD_TO_CART:
             return{
                 ...state,

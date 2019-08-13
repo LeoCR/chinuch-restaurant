@@ -9,7 +9,9 @@ import Drinks from '../components/Drinks';
 import ViewDish from '../components/view/ViewDish';
 import ViewDrink from "../components/view/ViewDrink";
 import CartContainer from "./CartContainer";
-import {addToCart} from '../actions/cartActions';
+import {addToCart,setOrders} from '../actions/cartActions';
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 class App extends React.Component {
   state={
     showModal:'showAddForm',
@@ -89,6 +91,7 @@ class App extends React.Component {
     }
   }
   addProductToCart=(product)=>{
+    
     var productObject=Object.assign({currency:'USD'},product);
     setTimeout(() => {
       $("#productName").val(product.name); 
@@ -103,9 +106,12 @@ class App extends React.Component {
     this.calculateOrders();
   }
   addToCart=(quantity)=>{
-      var orderObject = Object.assign({quantity: quantity}, this.state.product);
-      this.props.addToCart(orderObject);
-      this.calculateOrders();
+    var _this=this;  
+    var orderObject = Object.assign({quantity: quantity}, this.state.product);
+    this.props.addToCart(orderObject);
+    cookies.set('reef_chinuch_orders', JSON.stringify(this.props.orders.orders));
+  
+    this.calculateOrders();
   }
   componentDidMount(){
     this.props.fetchAppetizers();
@@ -113,6 +119,13 @@ class App extends React.Component {
     this.props.fetchDesserts();
     this.props.fetchDrinks();
     this.calculateOrders();
+    if(cookies.get('reef_chinuch_orders')){
+      console.log('cookies.get(reef_chinuch_orders)');
+      this.props.setOrders(cookies.get('reef_chinuch_orders'))
+    }
+    else{
+      console.log('We dont have cookies');
+    }
   }
   render() {
     return (
@@ -199,7 +212,7 @@ class App extends React.Component {
     );
   }
 }
-const mapStateToProps=(state)=>{
+const mapStateToProps=(state, ownProps)=>{
   return{
     mainCourses:state.menu.mainCourses,
     desserts:state.menu.desserts,
@@ -208,4 +221,4 @@ const mapStateToProps=(state)=>{
     orders:state.orders
   }
 }
-export default connect(mapStateToProps,{fetchMainCourses,fetchAppetizers,fetchDesserts,fetchDrinks,addToCart})(App)
+export default connect(mapStateToProps,{fetchMainCourses,fetchAppetizers,fetchDesserts,fetchDrinks,addToCart,setOrders})(App)

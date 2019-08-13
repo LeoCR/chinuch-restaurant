@@ -2,11 +2,17 @@ import React from "react";
 import $ from 'jquery';
 import {connect} from 'react-redux';
 import {updateItemUnits,deleteFromCart} from '../../actions/cartActions';
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 class CartProducts extends React.Component{
   deleteOrder=(order,e)=>{
       e.preventDefault();
+      var _this=this;
       this.props.deleteFromCart(order.id);
       this.props.calculateOrders();
+      setTimeout(() => {
+        cookies.set('reef_chinuch_orders', JSON.stringify(_this.props.orders.orders));
+      }, 300);
   }
   checkout=(e)=>{
     e.preventDefault();
@@ -21,12 +27,14 @@ class CartProducts extends React.Component{
     }
     this.props.updateItemUnits(order);
     this.props.calculateOrders();
+    cookies.set('reef_chinuch_orders', JSON.stringify(this.props.orders.orders));
   }
   incrementOrder=(order)=>{
     order.quantity=order.quantity+1;
     $('#quantity-added').val(order.quantity);
     this.props.updateItemUnits(order);
     this.props.calculateOrders();
+    cookies.set('reef_chinuch_orders', JSON.stringify(this.props.orders.orders));
   }
   calculateTotal=()=>{
     var orders=this.props.orders.orders,
