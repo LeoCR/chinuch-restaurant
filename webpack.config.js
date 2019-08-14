@@ -3,8 +3,9 @@ var HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   entry:{
-   app: path.resolve(__dirname, "src/app.js"),
-   checkout:path.resolve(__dirname,"src/checkout.js")
+    app: path.resolve(__dirname, "src/app.js"),
+    user: path.resolve(__dirname, "src/user.js"),
+    checkout:path.resolve(__dirname,"src/checkout.js")
   },
   output: {
     path: path.resolve(__dirname, "build"),
@@ -71,10 +72,14 @@ module.exports = {
     new HtmlWebPackPlugin({
       filename:'./index.html',
       template: "./public/index.html",
-    }) ,
+    }),
     new HtmlWebPackPlugin({
       filename:'./user.html',
       template: "./public/user.html",
+    }),  
+    new HtmlWebPackPlugin({
+      filename:'./checkout.html',
+      template: "./public/checkout.html",
     })  
   ]
 };

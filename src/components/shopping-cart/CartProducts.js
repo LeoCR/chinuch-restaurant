@@ -7,9 +7,9 @@ const cookies = new Cookies();
 class CartProducts extends React.Component{
   deleteOrder=(order,e)=>{
       e.preventDefault();
-      var _this=this;
       this.props.deleteFromCart(order.id);
       this.props.calculateOrders();
+      var _this=this;
       setTimeout(() => {
         cookies.set('reef_chinuch_orders', JSON.stringify(_this.props.orders.orders));
       }, 300);

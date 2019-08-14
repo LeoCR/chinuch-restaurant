@@ -112,14 +112,14 @@ class LoginForm extends React.Component{
                     <form id="signin" name="signin" method="post" onSubmit={(e)=>this.onSubmitLoginForm(e)} 
                         style={{width:'100%',padding:'0 8%'}}>
                         <div className="form-group">
-                            <label for="email">Email Address</label>
+                            <label htmlFor="email">Email Address</label>
                             <input name="email" type="text" className="form-control" onChange={(e)=>this.onChangeEmail(e)}/>
                             <p className="error-msg error-email" style={{display:'none'}}>
                                 {this.state.emailError}
                             </p>    
                         </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
+                        <div className="form-group">
+                            <label htmlFor="password">Password</label>
                             <input name="password" type="password" className="form-control" onChange={(e)=>this.onChangePassword(e)}/>
                             <p className="error-msg error-password" style={{display:'none'}}>
                                 {this.state.passwordError}
@@ -127,7 +127,7 @@ class LoginForm extends React.Component{
                         </div>
                         <p>Need an account?</p>
                         <span onClick={(e)=>this.getSignUpForm(e)} style={{color: '#e93e21'}}>Click here</span>
-                        <input type="submit" value="Sign In" className="btn btn-danger"/>
+                        <input type="submit" value="Sign In" className="btn btn-danger" id="login-btn"/>
                     </form>
                 </div>
             </React.Fragment>

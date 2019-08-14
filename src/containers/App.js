@@ -91,7 +91,6 @@ class App extends React.Component {
     }
   }
   addProductToCart=(product)=>{
-    
     var productObject=Object.assign({currency:'USD'},product);
     setTimeout(() => {
       $("#productName").val(product.name); 
@@ -105,12 +104,10 @@ class App extends React.Component {
     });
     this.calculateOrders();
   }
-  addToCart=(quantity)=>{
-    var _this=this;  
+  addToCart=(quantity)=>{ 
     var orderObject = Object.assign({quantity: quantity}, this.state.product);
     this.props.addToCart(orderObject);
-    cookies.set('reef_chinuch_orders', JSON.stringify(this.props.orders.orders));
-  
+    cookies.set('reef_chinuch_orders', JSON.stringify(this.props.orders.orders)); 
     this.calculateOrders();
   }
   componentDidMount(){
@@ -212,7 +209,7 @@ class App extends React.Component {
     );
   }
 }
-const mapStateToProps=(state, ownProps)=>{
+const mapStateToProps=(state)=>{
   return{
     mainCourses:state.menu.mainCourses,
     desserts:state.menu.desserts,

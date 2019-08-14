@@ -8,23 +8,25 @@ import passport  from 'passport';
 import cors  from 'cors';
 import session  from 'express-session';
 import https from 'https';
+import UserApp from './src/containers/user/UserApp';
+import CheckoutApp from './src/containers/checkout/CheckoutApp';
 import App from './src/containers/App';
 import {Provider} from "react-redux";
 import store from "./src/store"; 
 import { StaticRouter } from "react-router";
+import { appendUniversalPortals } from "react-portal-universal/lib/server";
+import FacebookStrategy from 'passport-facebook';
+import compression from 'compression';
+import methodOverride from 'method-override';
+import jwt from 'jsonwebtoken';
+import cookieParser from 'cookie-parser';
 
-const { appendUniversalPortals } = require("react-portal-universal/lib/server");
-const FacebookStrategy= require('passport-facebook'),
-GoogleStrategy = require( 'passport-google-oauth2' ).Strategy,
-compression = require('compression'),
-methodOverride = require('method-override'),
+var GoogleStrategy = require( 'passport-google-oauth2' ).Strategy,
 db = require(path.resolve(__dirname+'/private/app/db/config/config.js')),
 app = express(),
 User = db.user,
-jwt = require('jsonwebtoken');
-var cookieParser = require('cookie-parser'); 
+secretKey='943rjkhsOA)JAQ@#';
 
-var secretKey='943rjkhsOA)JAQ@#';
 var fbOpts={
   clientID: '1000175700179103',
   clientSecret: 'a9a5309580a601253cd18a4d23bfdf26',
@@ -168,7 +170,7 @@ app.use(function(err, req, res, next) {
   res.send('An error occurs: '+err);
 });
 app.set('view engine', '.html');
-app.get(['/','/desserts','/drinks','/main-courses','/checkout','/appetizers'], function (req, res) {
+app.get(['/','/desserts','/drinks','/main-courses','/appetizers'],function (req, res) {
     var context = {};
     const app = ReactDOMServer.renderToString(
         <StaticRouter location={req.url} context={context}>
@@ -189,6 +191,51 @@ app.get(['/','/desserts','/drinks','/main-courses','/checkout','/appetizers'], f
         return res.send(markup);
     });
 });
+app.get(['/user/profile','/user','/user/history',
+'/user/history/invoice/:order_code','/user/history/invoice/'],isLoggedIn, function (req, res) {
+  var context = {};
+  const app = ReactDOMServer.renderToString(
+      <StaticRouter location={req.url} context={context}>
+        <Provider store={store}>
+          <UserApp /> 
+        </Provider>
+      </StaticRouter>
+  );
+  const indexFile = path.resolve(__dirname+'/build/user.html');
+  fs.readFile(indexFile, 'utf8', (err, data) => {
+      if (err) {
+        console.error('Something went wrong:', err);
+        return res.status(500).send('Oops, better luck next time!');
+      }
+      var tempData=data;
+      tempData.replace('<section id="user"></section> ', `<section id="user">${app}</section>`)
+      const markup   = appendUniversalPortals(tempData);
+      return res.send(markup);
+  });
+});
+app.get(['/checkout','/checkout/payment','/payment-successfully'],isLoggedIn, function (req, res) {
+  var context = {};
+  const app = ReactDOMServer.renderToString(
+      <StaticRouter location={req.url} context={context}>
+        <Provider store={store}>
+          <CheckoutApp /> 
+        </Provider>
+      </StaticRouter>
+  );
+  const indexFile = path.resolve(__dirname+'/build/checkout.html');
+  fs.readFile(indexFile, 'utf8', (err, data) => {
+      if (err) {
+        console.error('Something went wrong:', err);
+        return res.status(500).send('Oops, better luck next time!');
+      }
+      var tempData=data;
+      tempData.replace('<section id="checkout"></section> ', `<section id="checkout">${app}</section>`)
+      tempData.replace('<script type="text/javascript" src="app.js"></script>','')
+      tempData.replace('<script type="text/javascript" src="user.js"></script>','')
+      const markup   = appendUniversalPortals(tempData);
+      return res.send(markup);
+  });
+});
 app.get('/api/validate/authentication',function(req,res){
   if (req.isAuthenticated()){
     res.json({isAuthenticated:true});
@@ -203,14 +250,22 @@ app.get(['/main.css','/css/main.css'],function(req,res){
 app.get(['/css/main.css.map','/main.css.map'],function(req,res){
   res.sendFile(path.resolve(__dirname+'/public/css/main.css.map'))
 })
-app.get('/app.js',function(req,res){
+app.get(['/app.js','/user/profile/app.js','/user/history/app.js','/user/app.js'],function(req,res){
     res.sendFile(path.resolve(__dirname+'/build/app.js'))
 })
-app.use(['/fonts/','/services/web-development/fonts/'],express.static(path.resolve(__dirname+'/public/fonts/')));
-app.use(['/img/','/services/web-development/img/'],express.static(path.resolve(__dirname+'/public/images/')));
-app.use(['/images/'],express.static(path.resolve(__dirname+'/public/images/')));
-app.use(['/'],express.static(path.resolve(__dirname+'/build')));
-app.use(['/js/','/services/'],express.static(path.resolve(__dirname+'/public/js/')));
+app.get(['/user.js','/user/profile/user.js','/user/history/user.js','/user/user.js'],function(req,res){
+  res.sendFile(path.resolve(__dirname+'/build/user.js'))
+})
+app.get(['/checkout.js','/user/profile/checkout.js','/checkout/payment/checkout.js',
+'/checkout/checkout.js','/payment-successfully/checkout.js',
+'/user/history/checkout.js','/user/checkout.js'],function(req,res){
+  res.sendFile(path.resolve(__dirname+'/build/checkout.js'))
+})
+app.use(['/fonts/','/user/profile/fonts/'],express.static(path.resolve(__dirname+'/public/fonts/')));
+app.use(['/img/','/user/profile/img/'],express.static(path.resolve(__dirname+'/public/images/')));
+app.use(['/images/','/user/profile/images/'],express.static(path.resolve(__dirname+'/public/images/')));
+app.use(['/','/user/profile/'],express.static(path.resolve(__dirname+'/build/')));
+app.use(['/js/','/user/profile/js/','/user/js/','/user/history/js/'],express.static(path.resolve(__dirname+'/public/js/')));
 
 const httpsOptions = {
   key: fs.readFileSync('/Users/leo/Documents/chinuch-restaurant/private/security/server.key'),
@@ -222,6 +277,7 @@ require(path.resolve(__dirname+'/private/app/route/dish.route.js'))(app,path);
 require(path.resolve(__dirname+'/private/app/route/user.route.js'))(app,path,isLoggedIn);
 require(path.resolve(__dirname+'/private/app/route/drink.route.js'))(app,path);
 require(path.resolve(__dirname+'/private/app/route/ingredient.route.js'))(app,path);
+require(path.resolve(__dirname+'/private/app/route/invoice.route.js'))(app,path,isLoggedIn);
 //load passport strategies
 require(path.resolve(__dirname+'/private/app/db/config/passport/passport.js'))(passport, models.user);
 require(path.resolve(__dirname+'/private/app/route/auth.route.js'))(app,passport,path,User,jwt); 

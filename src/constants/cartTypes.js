@@ -3,3 +3,4 @@ export const DELETE_FROM_CART = 'DELETE_FROM_CART';
 export const UPDATE_ITEM_UNITS = 'UPDATE_ITEM_UNITS';
 export const SHOW_ORDERS='SHOW_ORDERS';
 export const SET_ORDERS='SET_ORDERS';
+export const DELETE_ORDERS='DELETE_ORDERS';

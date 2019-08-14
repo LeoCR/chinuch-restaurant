@@ -81,7 +81,7 @@ class UserProfile extends React.Component{
                 });
             } 
             catch (error) {
-                console.log('An error occurs in UserProfile.getDerivedStateFromProps()');
+                console.log('An error occurs in UserProfile.getSnapshotBeforeUpdate()');
                 console.error(error);
             }
         }
@@ -90,18 +90,27 @@ class UserProfile extends React.Component{
         return(
             <div className="container-user-details">
                 <h1>User Profile</h1>
-                <form onSubmit={this.onSubmitProfile} id="form-profile"> 
-                    <label htmlFor="username">Username: </label>
-                    <input value={this.state.username} name="username" id="username" onChange={(e)=>this.onChangeUsername(e)}/>
-
-                    <label htmlFor="firstName">First Name: </label>
-                    <input value={this.state.firstName} name="firstName" id="firstName" onChange={(e)=>this.onChangeFirstName(e)}/>
-
-                    <label htmlFor="lastName">Last Name: </label>
-                    <input value={this.state.lastName} name="lastName" id="lastName" onChange={(e)=>this.onChangeLastName(e)}/>
-
-                    <label htmlFor="email">Email:</label>
-                    <input value={this.state.email} name="email" id="email" onChange={(e)=>this.onChangeEmail(e)}/>
+                <form onSubmit={this.onSubmitProfile} id="form-profile" style={{maxWidth:'900px'}}> 
+                    <div className="form-group">
+                        <label htmlFor="username">Username: </label>
+                        <input value={this.state.username} name="username" id="username" className="form-control"
+                        onChange={(e)=>this.onChangeUsername(e)}/>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="firstName">First Name: </label>
+                        <input value={this.state.firstName} name="firstName" id="firstName" className="form-control"
+                        onChange={(e)=>this.onChangeFirstName(e)}/>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="lastName">Last Name: </label>
+                        <input value={this.state.lastName} name="lastName" id="lastName" className="form-control"
+                        onChange={(e)=>this.onChangeLastName(e)}/>    
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="email">Email:</label>
+                        <input value={this.state.email} name="email" id="email" className="form-control"
+                        onChange={(e)=>this.onChangeEmail(e)}/>
+                    </div>
                     <button type="submit" className="btn btn-success">Update</button>
                     <button id="btn-logout" onClick={(e)=>this.logOut(e)} className="btn btn-danger">
                         Logout

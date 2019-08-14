@@ -76,13 +76,13 @@ span.required { color: darkred; font-weight: bold; font-size: 18px; }
 .caption_slide { padding: 1.5%; background: rgba(0, 0, 0, 0.7); }
 .caption_slide, .caption_title, .caption_description { -vendor-animation-duration: 2.5s; -vendor-animation-delay: 0s; -vendor-animation-iteration-count: 1; }
 .img_01, .img_02, .img_03, .caption_slide_01, .caption_slide_02, .caption_slide_03, .caption_title_01, .caption_title_02, .caption_title_03, .caption_description_01, .caption_description_02, .caption_description_03 { -vendor-animation-duration: 2.9s; -vendor-animation-delay: 0s; -vendor-animation-iteration-count: 1; }
-section#servicio_express, #menu, #catalogo_de_platos_fuertes, #catalogo_de_desayunos, #catalogo_de_postres { width: 100%; position: relative; float: left; min-height: 980px; height: 100%; }
+section#servicio_express, #menu, #catalogo_de_platos_fuertes, #catalogo_de_desayunos,
+ #catalogo_de_postres { width: 100%; position: relative; float: left; min-height: 980px; height: 100%; }
 #about_us{
   position: relative;
   float: left;
   display: block;
   width: 100%;
-  min-height: 980px;
   min-height: 980px;
   background-position: center;
   padding-top: 15%;
@@ -300,21 +300,26 @@ p ,.navbar-inverse .navbar-nav > li > a,h4,label{font-family: 'Open Sans', sans-
 	width: 42%;
   float: left;
   position: relative;
-  margin: 10px 0;
+  margin:5px;
   min-height: 210px;
   height: auto;
+  border: 1px dashed black;
+  border-radius: 15px;
+  background: #fbf9f3;
 }
 .menu-details {
-	float: right;
+	float: left;
 	position: relative;
   max-width: 200px;
   width:100%;
+  margin-left: 5%;
 }
 .menu-title{
   h5{
     position: relative ;
     color: #000 ;
     background: none;
+    min-height: 50px;
   }
 }
 .menu-thumbnail {
@@ -325,7 +330,25 @@ p ,.navbar-inverse .navbar-nav > li > a,h4,label{font-family: 'Open Sans', sans-
 .menu-thumbnail{
   img{
     max-width: 200px;
+    border-radius: 15px;
   }
+}
+.menu-description p {
+  min-height: 100px;
+  margin-top: 10px;
+}
+.price{
+ /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffaf4b+0,ff920a+100;Orange+3D+%231 */
+background: #ffaf4b; /* Old browsers */
+background: -moz-linear-gradient(top,  #ffaf4b 0%, #ff920a 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #ffaf4b 0%,#ff920a 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #ffaf4b 0%,#ff920a 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffaf4b', endColorstr='#ff920a',GradientType=0 ); /* IE6-9 */
+color: #000;
+padding: 5px 10px;
+border-radius: 15px;
+font-size: 10px;
+margin: 5px;
 }
 .btn-add-to-cart,.btn.button{
   background: #f9b868;
@@ -383,6 +406,172 @@ background: linear-gradient(to bottom, #ffa347 0%,#fc8c1b 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffa347', endColorstr='#fc8c1b',GradientType=0 );
 border-color: #ff9645 !important;
 color: #000 !important;
+}
+#user{
+  width: 100%;
+  position: relative;
+  float: left;
+  display: block;
+  margin-top:80px;
+  position: relative;
+  float: left;
+  display: block;
+  width: 100%;
+  min-height: 980px;
+  background-position: center;
+  background: url("../../images/pizza-slice.jpg");
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-size: auto;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+.tabs-content{
+  background: #fff;
+  margin-top: -18px;
+}
+#user-container{
+  margin:10% 5%;
+}
+
+.nav_tab{
+  background: #000 !important;
+  color: #fff !important;
+}
+.nav-tabs > li > a.active{
+  background: #ffa347 !important;
+  background: -moz-linear-gradient(top, #ffa347 0%, #fc8c1b 100%) !important;
+  background: -webkit-linear-gradient(top, #ffa347 0%, #fc8c1b 100%) !important;
+  background: linear-gradient(to bottom, #ffa347 0%,#fc8c1b 100%) !important;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffa347', endColorstr='#fc8c1b',GradientType=0 ) !important;
+  border-color: #ff9645 !important;
+  color: #000 !important;
+}
+#login-btn{
+  width: 100%;
+  position: relative;
+  float: left;
+}
+h5, .h5 {
+  font-size:19px;
+}
+button.close,button.close:hover{
+  background: #ffa347 !important;
+  background: -moz-linear-gradient(top, #ffa347 0%, #fc8c1b 100%) !important;
+  background: -webkit-linear-gradient(top, #ffa347 0%, #fc8c1b 100%) !important;
+  background: linear-gradient(to bottom, #ffa347 0%,#fc8c1b 100%) !important;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffa347', endColorstr='#fc8c1b',GradientType=0 );
+  border-color: #ff9645 !important;
+  text-shadow: none !important;
+  color: #000 !important;
+  margin: 0 auto !important;
+  opacity: 1 !important;
+  padding: 10px 15px !important;
+}
+.badge.badge-warning.text-dark{
+  color: #fff !important;
+}
+#checkout{
+  margin-top: 120px;
+}
+.orders,#checkout{
+  width: 100%;
+  position: relative;
+  height: auto;
+  float: left;
+  z-index: 2;
+}
+.modal-opened .orders,.modal-opened #checkout{
+  z-index: 99;
+}
+.modal .modal-title{
+  width: 90%;
+}
+.order-item .badge.badge-warning.text-dark{
+  background: darkred;
+  color: white;
+}
+.order-item-left-side{
+  width: 200px;
+  float: left;
+}
+.order-item-right-side{
+  float: right;
+  width: 100px;
+}
+#checkout .list-orders .list-group-item{
+  height:270px;
+}
+#checkout .list-orders{
+  max-width:380px;float: left;position: relative;
+  width: 100%;
+  z-index: 3;
+}
+#checkout-section {
+	position: relative;
+	float: left;
+	width: 100%;
+}
+.checkout-details{
+  max-width: 400px;
+  float: left;
+  position: relative;
+  padding-left: 120px;
+}
+#payment-method{
+  float: left;
+  padding-left:20px;
+  max-width:500px;
+  width: 100%;
+}
+#payment-method ul,#payment-method ul li{
+  list-style: none;
+}
+#payment-method input[type="radio"]{
+  width: 40px;
+  float: left;
+}
+body.modal-opened #header{
+  z-index: 1 !important;
+}
+.form-payment input{
+  border: 1px solid black;
+  margin:5px 10px;
+}
+#payment-method .list-group-item{
+  min-height: 80px;
+}
+.list-group-item.checkout-item-card .form-payment,
+.list-group-item.checkout-item-paypal .form-payment{  
+  display: none;
+}
+.list-group-item.checkout-item-card.selected .form-payment,
+.list-group-item.checkout-item-paypal.selected .form-payment{  
+  display: block !important;
+}
+#payment-method .list-group-item.selected{
+  min-height: 465px;  
+}
+.error-msg {
+	color: darkred;
+	font-size: 10px;
+  line-height: 0px;
+  width: 100%;
+  float: left;
+  position: relative;
+  -webkit-transition:all 0.6s  ease-in-out;
+  -moz-transition:all 0.6s  ease-in-out;
+  -o-transition:all 0.6s  ease-in-out;
+  transition:all 0.6s  ease-in-out;
+}
+.checkout-item-card.selected ellipse{
+  fill:#0068a1 !important;
+}
+.form-payment.method-to-pay {
+	width: 100%;
+  float: left;
+  display: block;
 }
 @media (max-width: 580px) {
   #btn-facebook p,#btn-google p{

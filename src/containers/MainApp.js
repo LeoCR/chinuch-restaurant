@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import App from './App';
 import {Provider} from "react-redux";
 import store from "../store"; 
@@ -10,7 +9,7 @@ class MainApp extends React.Component {
             <React.Fragment>
                     <BrowserRouter>
                         <Provider store={store}>
-                            <App cookies={this.props.cookies}/> 
+                            <App/> 
                         </Provider>
                     </BrowserRouter>
             </React.Fragment>

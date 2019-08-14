@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "nodemon --exec babel-node server.js --presets @babel/preset-env,@babel/preset-react --plugins @babel/plugin-proposal-class-properties,@babel/plugin-transform-runtime",
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack --config webpack.config.js",
+    "dev": "webpack --mode development --config webpack.config.js"
   },
   "author": "leonardoAranibarSanchez",
   "license": "ISC",
