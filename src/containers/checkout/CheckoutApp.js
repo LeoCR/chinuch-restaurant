@@ -4,7 +4,7 @@ import CartContainer from "../CartContainer";
 import OrderContainer from "./OrderContainer";
 import {connect} from 'react-redux';
 import {addToCart,setOrders} from '../../actions/cartActions';
-import {fetchMainCourses,fetchAppetizers,fetchDesserts,fetchDrinks} from '../../actions/menuActions';
+
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 class CheckoutApp extends React.Component {
@@ -82,14 +82,13 @@ class CheckoutApp extends React.Component {
         })
     }
     componentDidMount(){
-        this.props.fetchAppetizers();
-        this.props.fetchMainCourses();
-        this.props.fetchDesserts();
-        this.props.fetchDrinks();
-        this.calculateOrders();
+        var _this=this;
         if(cookies.get('reef_chinuch_orders')){
-          console.log('cookies.get(reef_chinuch_orders)');
-          this.props.setOrders(cookies.get('reef_chinuch_orders'))
+          setTimeout(() => {
+            console.log('cookies.get(reef_chinuch_orders)');
+            _this.props.setOrders(cookies.get('reef_chinuch_orders'))
+            _this.calculateOrders();
+          }, 500);
         }
         else{
           console.log('We dont have cookies');
@@ -120,4 +119,4 @@ const mapStateToProps=(state)=>{
     orders:state.orders
   }
 }
-export default connect(mapStateToProps,{fetchMainCourses,fetchAppetizers,fetchDesserts,fetchDrinks,setOrders,addToCart})(CheckoutApp)
+export default connect(mapStateToProps,{setOrders,addToCart})(CheckoutApp)

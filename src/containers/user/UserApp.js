@@ -4,7 +4,6 @@ import CartContainer from "../CartContainer";
 import UserContainer from "./UserContainer";
 import {connect} from 'react-redux';
 import {addToCart,setOrders} from '../../actions/cartActions';
-import {fetchMainCourses,fetchAppetizers,fetchDesserts,fetchDrinks} from '../../actions/menuActions';
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 class UserApp extends React.Component {
@@ -68,16 +67,16 @@ class UserApp extends React.Component {
           console.error(error);
         }
         finally{
-          if(totalQuantity<10){
-            this.setState({
-              totalOrders:'0'+totalQuantity
-            })
-          }
-          else{
-            this.setState({
-              totalOrders:totalQuantity
-            })
-          }
+            if(totalQuantity<10){
+              this.setState({
+                totalOrders:'0'+totalQuantity
+              })
+            }
+            else{
+              this.setState({
+                totalOrders:totalQuantity
+              })
+            }
         }
         if(totalQuantity>=1){
             this.setState({
@@ -106,18 +105,17 @@ class UserApp extends React.Component {
         this.calculateOrders();
       }
     componentDidMount(){
-        this.props.fetchAppetizers();
-        this.props.fetchMainCourses();
-        this.props.fetchDesserts();
-        this.props.fetchDrinks();
-        this.calculateOrders();
-        if(cookies.get('reef_chinuch_orders')){
+      var _this=this;
+      if(cookies.get('reef_chinuch_orders')){
+        setTimeout(() => {
           console.log('cookies.get(reef_chinuch_orders)');
-          this.props.setOrders(cookies.get('reef_chinuch_orders'))
-        }
-        else{
-          console.log('We dont have cookies');
-        }
+          _this.props.setOrders(cookies.get('reef_chinuch_orders'))
+          _this.calculateOrders();
+        }, 500);
+      }
+      else{
+        console.log('We dont have cookies');
+      }
     }
   render() {
     return (
@@ -142,12 +140,8 @@ class UserApp extends React.Component {
 }
 const mapStateToProps=(state)=>{
     return{
-      mainCourses:state.menu.mainCourses,
-      desserts:state.menu.desserts,
-      appetizers:state.menu.appetizers,
-      drinks:state.menu.drinks,
       orders:state.orders
     }
 }
 
-export default connect(mapStateToProps,{fetchMainCourses,fetchAppetizers,fetchDesserts,fetchDrinks,addToCart,setOrders})(UserApp)
+export default connect(mapStateToProps,{addToCart,setOrders})(UserApp)
