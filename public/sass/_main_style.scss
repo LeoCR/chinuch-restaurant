@@ -91,6 +91,15 @@ section#servicio_express, #menu, #catalogo_de_platos_fuertes, #catalogo_de_desay
   background-attachment: fixed;
   background-repeat: no-repeat;
 }
+.arrow-ingredient{
+  background-position: center;
+  width: 25px;
+  height: 25px;
+  background: url("../../images/arrow.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  float: left;
+}
 #contact{
   background: url("../../images/bg-contact.jpg");
   background-size: cover;
@@ -572,6 +581,62 @@ body.modal-opened #header{
 	width: 100%;
   float: left;
   display: block;
+}
+.total-row {
+  background: #e87444 !important;
+}
+.table > thead > tr > th ,.table .thead-dark th{
+	background: #000 !important;
+	color: #fff !important;
+}
+.table > thead > tr > th, table td, table th {
+	border: 1px solid #000 !important;
+}.btn-view-more
+{
+  background: #ffa347;
+background: -moz-linear-gradient(top, #ffa347 0%, #fc8c1b 100%);
+background: -webkit-linear-gradient(top, #ffa347 0%, #fc8c1b 100%);
+background: linear-gradient(to bottom, #ffa347 0%,#fc8c1b 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffa347', endColorstr='#fc8c1b',GradientType=0 );
+border-color: #ff9645 !important;
+color: #000 !important;
+}
+
+.dish-description{
+  background: #000;
+  h5.description-title{
+    color: #fff;
+    text-align: start;
+    position: relative;
+    width: 235px;
+    padding: 15px 35px;
+    color: #fff;
+  }
+  p,span{
+    color: #fff;
+  }
+  p{
+    padding: 10px 20px;
+  }
+}
+#list-ingredients {
+  li{
+    width: 100%;
+    float: left;
+    position: relative;
+  }
+  p {
+    width: 80%;
+    float: left;
+    max-width: 170px;
+    color: #000;
+  }
+  img{
+    width:50px;
+    max-height: 50px;
+    float: left;
+    position: relative;
+  }
 }
 @media (max-width: 580px) {
   #btn-facebook p,#btn-google p{

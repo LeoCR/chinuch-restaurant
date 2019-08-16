@@ -50,8 +50,9 @@ class CartProducts extends React.Component{
         </React.Fragment>
     )
   }
-  goToMenu=()=>{
-    
+  goToMenu=(e)=>{
+    e.preventDefault();
+    window.location.replace("/#menu");
   }
     render(){
       var orders=this.props.orders.orders;
@@ -60,7 +61,7 @@ class CartProducts extends React.Component{
             return(
                 <div className="modal-body">
                     Your cart is Empty
-                    <button className="btn btn-success" onClick={()=>this.goToMenu()}>Go to Cart</button>
+                    <button className="btn btn-success" onClick={(e)=>this.goToMenu(e)}>Go to Cart</button>
                 </div>
             )
       } 
@@ -79,12 +80,12 @@ class CartProducts extends React.Component{
                             onClick={(e)=>this.deleteOrder(order,e)}>
                                 <span aria-hidden="true">&times;</span>
                         </button>
-                        <p style={{width:'225px'}}>
+                        <div style={{width:'225px'}}>
                             <p style={{width:' 75px',float:'left'}}>Quantity:</p>
-                            <p style={{width:'80px',height:'30px',float:'left', border:'1px solid black',padding:'0'}}  id="quantity-added">{order.quantity} </p>
+                            <div style={{width:'80px',height:'30px',float:'left', border:'1px solid black',padding:'0'}}  id="quantity-added">{order.quantity} </div>
                             <button type="button" className="btn btn-primary" onClick={()=>this.decrementOrder(order)} style={{float: 'right'}}>-</button>
                             <button type="button" className="btn btn-success" onClick={()=>this.incrementOrder(order)} style={{float: 'right'}}>+</button>
-                        </p>
+                        </div>
                     </li>
                 )}
                 </ul>
@@ -96,7 +97,6 @@ class CartProducts extends React.Component{
 }
 const mapStateToProps=(state)=>{
     return{
-      products:state.products,
       orders:state.orders
     }
 }

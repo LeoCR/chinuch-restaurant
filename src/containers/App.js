@@ -115,12 +115,9 @@ class App extends React.Component {
     this.props.fetchMainCourses();
     this.props.fetchDesserts();
     this.props.fetchDrinks();
-    
     var _this=this;
     if(cookies.get('reef_chinuch_orders')){
       setTimeout(() => {
-        console.log('cookies.get(reef_chinuch_orders)');
-        console.log(cookies.get('reef_chinuch_orders'));
         _this.props.setOrders(cookies.get('reef_chinuch_orders'))
         _this.calculateOrders();
       },500);

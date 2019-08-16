@@ -4,7 +4,6 @@ import CartContainer from "../CartContainer";
 import OrderContainer from "./OrderContainer";
 import {connect} from 'react-redux';
 import {addToCart,setOrders} from '../../actions/cartActions';
-
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 class CheckoutApp extends React.Component {
@@ -85,10 +84,9 @@ class CheckoutApp extends React.Component {
         var _this=this;
         if(cookies.get('reef_chinuch_orders')){
           setTimeout(() => {
-            console.log('cookies.get(reef_chinuch_orders)');
-            _this.props.setOrders(cookies.get('reef_chinuch_orders'))
+            _this.props.setOrders(cookies.get('reef_chinuch_orders'));
             _this.calculateOrders();
-          }, 500);
+          },500);
         }
         else{
           console.log('We dont have cookies');
@@ -98,7 +96,6 @@ class CheckoutApp extends React.Component {
         return (
         <React.Fragment> 
             <OrderContainer 
-            orders={this.props.orders}
             totalOrders={this.state.totalOrders}/>
             <CartContainer 
                 setShowLogin={this.setShowLogin}
@@ -109,7 +106,7 @@ class CheckoutApp extends React.Component {
                 totalOrders={this.state.totalOrders}
                 addToCart={this.addToCart} 
                 calculateOrders={this.calculateOrders}
-            />
+            /> 
         </React.Fragment>
         );
     }

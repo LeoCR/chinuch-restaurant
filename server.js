@@ -170,7 +170,8 @@ app.use(function(err, req, res, next) {
   res.send('An error occurs: '+err);
 });
 app.set('view engine', '.html');
-app.get(['/','/desserts','/drinks','/main-courses','/appetizers'],function (req, res) {
+app.get(['/','/desserts','/drinks','/main-courses','/appetizers','/appetizers/:id',
+'/desserts/:id','/drinks/:id','/main-courses/:id'],function (req, res) {
     var context = {};
     const app = ReactDOMServer.renderToString(
         <StaticRouter location={req.url} context={context}>
@@ -229,9 +230,7 @@ app.get(['/checkout','/checkout/payment','/payment-successfully'],isLoggedIn, fu
         return res.status(500).send('Oops, better luck next time!');
       }
       var tempData=data;
-      tempData.replace('<section id="checkout"></section> ', `<section id="checkout">${app}</section>`)
-      tempData.replace('<script type="text/javascript" src="app.js"></script>','')
-      tempData.replace('<script type="text/javascript" src="user.js"></script>','')
+      tempData.replace('<section id="checkout"></section> ', `<section id="checkout">${app}</section>`) 
       const markup   = appendUniversalPortals(tempData);
       return res.send(markup);
   });
@@ -250,22 +249,27 @@ app.get(['/main.css','/css/main.css'],function(req,res){
 app.get(['/css/main.css.map','/main.css.map'],function(req,res){
   res.sendFile(path.resolve(__dirname+'/public/css/main.css.map'))
 })
-app.get(['/app.js','/user/profile/app.js','/user/history/app.js','/user/app.js'],function(req,res){
-    res.sendFile(path.resolve(__dirname+'/build/app.js'))
-})
-app.get(['/user.js','/user/profile/user.js','/user/history/user.js','/user/user.js'],function(req,res){
-  res.sendFile(path.resolve(__dirname+'/build/user.js'))
-})
-app.get(['/checkout.js','/user/profile/checkout.js','/checkout/payment/checkout.js',
-'/checkout/checkout.js','/payment-successfully/checkout.js',
-'/user/history/checkout.js','/user/checkout.js'],function(req,res){
-  res.sendFile(path.resolve(__dirname+'/build/checkout.js'))
-})
+
 app.use(['/fonts/','/user/profile/fonts/'],express.static(path.resolve(__dirname+'/public/fonts/')));
 app.use(['/img/','/user/profile/img/'],express.static(path.resolve(__dirname+'/public/images/')));
 app.use(['/images/','/user/profile/images/'],express.static(path.resolve(__dirname+'/public/images/')));
 app.use(['/','/user/profile/'],express.static(path.resolve(__dirname+'/build/')));
-app.use(['/js/','/user/profile/js/','/user/js/','/user/history/js/'],express.static(path.resolve(__dirname+'/public/js/')));
+app.use(['/js/','/user/profile/js/','/user/js/',
+'/user/history/js/','/main-courses/js/'],express.static(path.resolve(__dirname+'/public/js/')));
+
+app.get(['/app.js','/user/profile/app.js','/user/history/app.js',
+'/user/app.js','/main-courses/js/app.js','/main-courses/app.js'],function(req,res){
+    res.sendFile(path.resolve(__dirname+'/build/app.js'))
+})
+app.get(['/user.js','/user/profile/user.js','/user/history/user.js',
+'/user/user.js','/main-courses/js/user.js','/main-courses/user.js'],function(req,res){
+  res.sendFile(path.resolve(__dirname+'/build/user.js'))
+})
+app.get(['/checkout.js','/user/profile/checkout.js','/checkout/payment/checkout.js',
+'/checkout/checkout.js','/payment-successfully/checkout.js','/main-courses/checkout.js',
+'/user/history/checkout.js','/user/checkout.js','/main-courses/js/checkout.js'],function(req,res){
+  res.sendFile(path.resolve(__dirname+'/build/checkout.js'))
+})
 
 const httpsOptions = {
   key: fs.readFileSync('/Users/leo/Documents/chinuch-restaurant/private/security/server.key'),

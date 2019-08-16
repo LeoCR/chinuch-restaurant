@@ -2,8 +2,9 @@ import React from 'react';
 import $ from 'jquery';
 import api from '../../apis/api';
 import {connect} from 'react-redux';
-import history from '../../history';
 import {getOrders,deleteOrders} from '../../actions/cartActions';
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 class CheckoutForm extends React.Component{
     constructor (props) {
         super(props);
@@ -188,8 +189,6 @@ class CheckoutForm extends React.Component{
                             date_of_billing:todayIs
                         }
                         if(this.state.userId>0){
-                            console.log('this.state.userId');
-                            console.log(this.state.userId);
                             await api.post('/api/add/header-invoice',{headerInvoice})
                             .then(res=>{
                                 console.log('headerInvoice created ');
@@ -201,7 +200,8 @@ class CheckoutForm extends React.Component{
                             })
                             await api.post('/api/add/invoice',{invoiceDetail})
                             .then(res=>{
-                                console.log('Invoice created '+res);
+                                console.log('Invoice created ');
+                                console.log(res);
                             })
                             .catch(err=>{
                                 console.log('An error occurs on post(/api/add/invoice)');
@@ -216,9 +216,8 @@ class CheckoutForm extends React.Component{
                 }
                 while(i<=this.props.orders.orders.length)
                 setTimeout(() => {
-                    console.log('Finished Payment Transaction');
-                    history.push('/payment-successfully')
-                    //localStorage.clear();
+                    window.location.replace('/payment-successfully');
+                    cookies.remove('reef_chinuch_orders')
                     _this.props.deleteOrders();
                     _this.props.getOrders();
                 }, 3900);
@@ -261,7 +260,7 @@ class CheckoutForm extends React.Component{
         }, 700);
         await api.get('/api/count-max-order-code')
         .then((res)=>{
-            var tempNexOrder=parseInt(res.data[0].maxOrderCode)+1;
+            var tempNexOrder=parseInt(res.data[0].maxordercode)+1;
             _this.setState({
                 nextOrderCode:'INVC'+tempNexOrder
             })

@@ -185,7 +185,7 @@ class SignUpForm extends React.Component{
                 <div className="col-xs-12 col-lg-12">
                     <form id="signup" onSubmit={(e)=>this.onSubmitSignUpForm(e)}>
                         <div className="form-group">
-                            <label for="username">Username</label>
+                            <label htmlFor="username">Username</label>
                             <input name="username" type="text" className="form-control"
                                 onChange={(e)=>this.onChangeUsername(e)}/>
                         </div>
@@ -193,7 +193,7 @@ class SignUpForm extends React.Component{
                             {this.state.errorUsername}
                         </p>
                         <div className="form-group">
-                            <label for="email">Email Address</label>
+                            <label htmlFor="email">Email Address</label>
                             <input name="email" type="email" className="form-control" 
                                 onChange={(e)=>this.onChangeEmail(e)}
                             />
@@ -202,7 +202,7 @@ class SignUpForm extends React.Component{
                             {this.state.errorEmail}
                         </p>
                         <div className="form-group">
-                            <label for="firstname">First Name</label>
+                            <label htmlFor="firstname">First Name</label>
                             <input name="firstname" type="text" className="form-control"
                                 onChange={(e)=>this.onChangeFirstName(e)}/>
                         </div>
@@ -210,7 +210,7 @@ class SignUpForm extends React.Component{
                             {this.state.errorFirstName}
                         </p>
                         <div className="form-group">
-                            <label for="lastname">Last Name</label>
+                            <label htmlFor="lastname">Last Name</label>
                             <input name="lastname" type="text" className="form-control"
                                 onChange={(e)=>this.onChangeLastName(e)}/>
                         </div>
@@ -218,7 +218,7 @@ class SignUpForm extends React.Component{
                             {this.state.errorLastName}
                         </p>
                         <div className="form-group">
-                            <label for="password">Password</label>
+                            <label htmlFor="password">Password</label>
                             <input name="password" type="password" className="form-control"
                                 onChange={(e)=>this.onChangePassword(e)}/>
                         </div>

@@ -39,21 +39,24 @@ class ViewDish extends React.Component {
             titleHtml=<h3>Ingredients</h3>
         }
         return( 
-            <ul>
+            <div className="ingredients-container">
                 {titleHtml}
-            {
-                this.props.ingredients.map(ingredient =>
-                    {
-                        return(
-                            <li>
-                                {ingredient.name} 
-                                <img src={ingredient.img} alt={ingredient.name} style={{width:'50px'}}/>
-                            </li>
-                        )
-                    }
-                )
-            }
-            </ul>
+                <ul id="list-ingredients">
+                {
+                    this.props.ingredients.map(ingredient =>
+                        {
+                            return(
+                                <li>
+                                    <span className="arrow-ingredient"></span>
+                                    <p>{ingredient.name} </p>
+                                    <img src={ingredient.img} alt={ingredient.name}/>
+                                </li>
+                            )
+                        }
+                    )
+                }
+                </ul>
+            </div>
         )
     }
     render(){
@@ -70,11 +73,13 @@ class ViewDish extends React.Component {
             <div className="container" key={id}>
                 <Link to={`/${this.state.prevPage}`} className="btn btn-success">Back</Link>
                 <h1>{name}</h1>
-                <img src={picture} alt={name} style={{maxWidth:'190px'}}/>
-                <p>Description: {description}</p>
-                <p>Price: {price}$ </p>
-                
-                {this.getIngredients()}  
+                <img src={picture} alt={name} />
+                <div className="dish-description">
+                    <h5 className="description-title">Description: </h5>
+                    <p>{description}</p>
+                    <p >Price: <span className="price">${price}</span> </p>
+                </div> 
+                {this.getIngredients()} 
             </div>
         )
     }

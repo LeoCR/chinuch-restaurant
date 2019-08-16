@@ -1,8 +1,27 @@
 import React from "react";
-import Order from "../../components/checkout/Order";
 import { Switch, Route, Link } from "react-router-dom";
 import Checkout from '../../components/checkout/Checkout';
+import {connect} from 'react-redux';
+import {setOrders,deleteFromCart} from '../../actions/cartActions';
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 class OrderContainer extends React.Component{
+    deleteOrder=(order,e)=>{
+        e.preventDefault();
+        this.props.deleteFromCart(order.id);
+        var _this=this;
+        setTimeout(() => {
+            cookies.set('reef_chinuch_orders', JSON.stringify(_this.props.orders.orders));
+        }, 300);
+    }
+    componentDidMount(){
+        var _this=this;
+        if(cookies.get('reef_chinuch_orders')){
+            setTimeout(() => {
+              _this.props.setOrders(cookies.get('reef_chinuch_orders'))
+            },300);
+        }
+    }
     renderOrders=()=>{
         const {orders}=this.props.orders;
         if(orders.length===0){
@@ -23,8 +42,17 @@ class OrderContainer extends React.Component{
                                     {
                                         return(
                                             <li className="orders list-group-item" key={order.id} >
-                                                <Order info={order}
-                                                />
+                                                <div className="order-item" key={order.id}>
+                                                    <div className="order-item-left-side">
+                                                        <h3>  {order.name}</h3>
+                                                        <h5>Quantity:  {order.quantity}</h5>    
+                                                        <p>Price per unit:<span className="badge badge-warning text-dark">${order.price}</span></p>
+                                                        <img src={order.picture} alt={order.name} style={{maxWidth:"80px"}}/>
+                                                    </div>
+                                                    <div className="order-item-right-side">
+                                                        <button className="btn btn-danger" onClick={(e)=>this.deleteOrder(order,e)}>X</button>
+                                                    </div>
+                                                </div>
                                             </li>
                                         )
                                     } 
@@ -50,8 +78,8 @@ class OrderContainer extends React.Component{
         }
         return(
             <React.Fragment>
-                <hr></hr>
-                <h3 style={{float:'left'}}>{totalPrice}$</h3>
+                <h1 style={{float:'left'}}>Total:</h1> 
+                <h3 style={{float:'left'}}>${totalPrice}</h3>
             </React.Fragment>
         )
     }
@@ -78,7 +106,6 @@ class OrderContainer extends React.Component{
                         path='/checkout'
                         render={() => <React.Fragment>
                             {this.renderOrders()}
-                            <h1 style={{float:'left'}}>Total:</h1> 
                             {this.calculateTotal()}
                             {this.renderCheckout()}
                         </React.Fragment>}
@@ -88,7 +115,6 @@ class OrderContainer extends React.Component{
                         path='/checkout/payment'
                         render={() =><React.Fragment>
                             {this.renderOrders()}
-                            <h1 style={{float:'left'}}>Total:</h1> 
                             {this.calculateTotal()}
                              <Checkout/>
                         </React.Fragment>}
@@ -105,4 +131,9 @@ class OrderContainer extends React.Component{
         )
     }
 }
-export default OrderContainer;
+const mapStateToProps=(state)=>{
+    return{
+      orders:state.orders
+    }
+}
+export default connect(mapStateToProps,{setOrders,deleteFromCart})(OrderContainer)
