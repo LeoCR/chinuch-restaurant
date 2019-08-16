@@ -12,7 +12,7 @@
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>  
 </head>
 <body id="body_home">
-  <div id="home_page">
+  <main id="home_page">
             <header class="page-header" id="header_nav">
               <a class="navbar-brand" href="/" style="float:right;z-index: 9;position: relative;">
                 <img src="./images/logo-reef-chinuch.png" alt="Logo Reed Chinuch Restaurant" id="reef-chinuch-logo" style="max-width:130px;"/>
@@ -113,54 +113,55 @@
                           </div><!--End <div class="panel-heading">-->
                           <div class="panel-body">
                             <article class="container reservation_form">
-                              <form role="form" id="reservation_form" class="col-lg-12">
+                              <form role="form" id="reservation-form" class="col-lg-12">
                                       <div class="form-group">
-                                          <label class="control-label" for="name_reservacion">
+                                          <label class="control-label" for="input-rsrv-full-name">
                                             <span class="required">*</span>Full Name:</label>
-                                          <input type="text" class="form-control name_reservacion"
+                                          <input type="text" class="form-control input-rsrv-full-name"
                                           placeholder="Full Name"
-                                            id="name_reservacion" >
+                                            id="input-rsrv-full-name" />
                                       </div>
                                       <div class="form-group">
-                                          <label class="control-label" for="telefono_reservacion">
+                                          <label class="control-label" for="input-rsrv-phone">
                                             <span class="required">*</span>Telephone:</label>
                                           <input type="tel" class="form-control telefono_reservacion"
-                                          placeholder="Your telephone number"
-                                          id="telefono_reservacion" >
+                                          placeholder="Your telephone number" name="input-rsrv-phone"
+                                          id="input-rsrv-phone" />
                                       </div>
                                       <div class="form-group">
-                                            <label class="control-label" for="cantidad_reservacion"><span class="required">*</span> 
+                                            <label class="control-label" for="input-rsrv-people">
+                                              <span class="required">*</span> 
                                               Persons:</label>
-                                            <input type="number" class="form-control cantidad_reservacion"
+                                            <input type="number" class="form-control input-rsrv-people"
                                             placeholder="Quantity of Personas"
-                                            id="cantidad_reservacion" name="cantidad_reservacion">
+                                            id="input-rsrv-people" name="input-rsrv-people"/>
                                       </div>
                                       <div class="form-group">
-                                            <label class="control-label" for="fecha_reservacion">
+                                            <label class="control-label" for="input-rsrv-date">
                                             <span class="required">*</span> Date and Hour:</label>
                                             <div class="input-group">
                                                 <div class="input-group-addon">
                                                   <i class="fa fa-calendar"></i>
                                                 </div>
                                                 <input class="form-control datepicker"
-                                                id="fecha_reservacion" name="fecha_reservacion"
+                                                id="input-rsrv-date" name="input-rsrv-date"
                                                 placeholder="Date and Hour" type="text"/>
                                             </div>
                                       </div>
                                       <div class="form-group">
-                                          <label class="control-label" for="email_reservacion">
+                                          <label class="control-label" for="input-rsrv-email">
                                             <span class="required">*</span>
                                             Email:</label>
-                                          <input type="email" class="form-control email_reservacion"
+                                          <input type="email" class="form-control input-rsrv-email"
                                           placeholder="Your Email"
-                                          id="email_reservacion" name="email_reservacion">
+                                          id="input-rsrv-email" name="input-rsrv-email"/>
                                       </div>
                                       <div class="form-group">
-                                          <label for="direccion_exacta" class="control-label">
+                                          <label for="input-rsrv-message" class="control-label">
                                           Comment:</label>
                                           <textarea class="form-control"
                                           placeholder="Your Comments"
-                                          rows="5" id="reservation_comment"></textarea>
+                                          rows="5" id="input-rsrv-message"></textarea>
                                       </div>
                                       <button type="submit" class="btn btn-primary" id="btn_reservar">Reserve</button>
                               </form>
@@ -184,20 +185,20 @@
                                 <span class="required">*</span>Full Name:</label>
                               <input type="text" class="form-control name_contact"
                               placeholder="Your full name."
-                              id="name_contact" >
+                              id="name_contact" />
                           </div>
                           <div class="form-group" >
                               <label for="telephone_contact" class="control-label">
                                 <span class="required">*</span>Telephone:</label>
                               <input type="tel" placeholder="Your telephone number"
-                              class="form-control telephone_contact" id="telephone_contact" >
+                              class="form-control telephone_contact" id="telephone_contact" />
                           </div>
                           <div class="form-group">
                               <label for="email_contact" class="control-label">
                                 <span class="required">*</span>Email:</label>
                               <input type="email" class="form-control email_contact"
                               id="email_contact" name="email_contact"
-                                placeholder="Your Email">
+                                placeholder="Your Email"/>
                           </div>
                           <div class="form-group">
                               <label for="comments_contact" class="control-label">
@@ -211,67 +212,160 @@
                 </div>        
               </article><!--End <article class="container contact_form"> -->
             </section><!--End  <section id="contact">-->
-        <!-- <div class="modal" id="modal_dialog">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close btn_close"
-                      data-dismiss="modal"
-                      aria-hidden="true">&times;</button>
-                      <h1 class="modal-title" id="modal_title"></h1>
-                    </div>
-                    <div class="modal-body" id="modal_content">
-                    </div>
-                    <div class="modal-footer" id="buttons_ctrl">
-                      <button type="button" class="btn btn-primary btn_close"
-                      data-dismiss="modal" id="close_modal">Cerrar</button>
-                    </div>
+            <div class="modal" id="contact_modal_dialog">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close btn_close"
+                    data-dismiss="modal"
+                    aria-hidden="true">&times;</button>
+                    <h1 class="modal-title" id="contact-modal-title"></h1>
+                  </div>
+                  <div class="modal-body" id="contact-modal-content">
+                  </div>
+                  <div class="modal-footer" id="buttons_ctrl">
+                    <button type="button" class="btn btn-primary btn_close"
+                    data-dismiss="modal" id="close_modal">Close</button>
                   </div>
                 </div>
-        </div> --><!--End <div class="modal" id="modal_dialog"> -->
-  </div>
+              </div>
+            </div>
+      </main>
  </body>
   <script type="text/javascript" src="js/bootstrap-datepicker.js" charset="UTF-8" data-defer="defer"></script>
   <script src="js/swiper.jquery.min.js" data-defer="defer"></script>
   <script data-defer="defer">
+    var $contactForm=document.getElementById("contact_form");
+    var $inputCntcFullName=document.getElementById("name_contact");
+    var $inputCntcPhone=document.getElementById("telephone_contact");
+    var $inputCntcEmail=document.getElementById("email_contact");
+    var $inputCntcMessage=document.getElementById("comments_contact");
+    var $contactData={};
+    var $tempHtmlContactForm='';
+
+    $contactForm.addEventListener("submit", function(evt) {
+        evt.preventDefault();
+        $contactData={
+            fullName:$inputCntcFullName.value,
+            phoneNumber:$inputCntcPhone.value,
+            email:$inputCntcEmail.value,
+            comment:$inputCntcMessage.value
+        }
+        if($inputCntcFullName.value!=='' && $inputCntcPhone.value!==''
+         && $inputCntcEmail.value!==''&& $inputCntcMessage.value!==''){
+          $.post("/submit/contact-form",$contactData )
+          .done(function( data ) {
+            $("#contact-modal-title").html("Sending Form")
+            if(data){
+              $tempHtmlContactForm+="<p>The form was sent successfully, with the Following data:</p>";    
+              $tempHtmlContactForm+='<ul>';
+              $tempHtmlContactForm+='<li><p>Full Name: '+data.fullName+'</p></li>';
+              $tempHtmlContactForm+='<li><p>Telephone: '+data.phoneNumber+'</p></li>';
+              $tempHtmlContactForm+='<li><p>Email: '+data.email+'</p></li>';   
+              $tempHtmlContactForm+='<li><p>Comment: '+data.comment+'</p></li>';
+              $tempHtmlContactForm+='</ul>';
+            }
+            $("#contact-modal-content").html($tempHtmlContactForm);
+              setTimeout(() => {
+                $('#contact_modal_dialog').toggleClass('opened');
+            }, 500);
+          })
+          .fail(function(err) {
+            $("#contact-modal-title").html("Error Sending Form")
+              $("#contact-modal-content").html("<p>The form wasn't sent successfully.</p>");
+              setTimeout(() => {
+                $('#contact_modal_dialog').toggleClass('opened');
+              }, 500);
+              console.log( "An error occurs on submit.contactForm=> "+err );
+          })
+        }
+        else{
+          $("#contact-modal-title").html("Error Sending Form")
+          $("#contact-modal-content").html("<p>The form wasn't sent successfully, all the fields are required.</p>");
+          setTimeout(() => {
+            $('#contact_modal_dialog').toggleClass('opened');
+          }, 500);
+        }
+    });
+
+    var $reservationForm = document.getElementById("reservation-form");
+    var $inputRsrvFullName=document.getElementById("input-rsrv-full-name");
+    var $inputRsrvPhoneNumber=document.getElementById('input-rsrv-phone');
+    var $inputRsrvEmail=document.getElementById("input-rsrv-email");
+    var $inputRsrvDate=document.getElementById("input-rsrv-date");
+    var $inputRsrvPersons=document.getElementById("input-rsrv-people");
+    var $txtRsrvComment=document.getElementById("input-rsrv-message");
+    var $reservationData={};
+    var tempHtmlReservation='';
+
+    $reservationForm.addEventListener("submit", function(evt) {
+        evt.preventDefault();
+        $reservationData={
+              fullName:$inputRsrvFullName.value,
+              phoneNumber:$inputRsrvPhoneNumber.value,
+              email:$inputRsrvEmail.value,
+              date:$inputRsrvDate.value,
+              persons:$inputRsrvPersons.value,
+              comment:$txtRsrvComment.value
+        };
+        if($inputRsrvFullName.value!=='' && $inputRsrvPhoneNumber.value!==''
+          && $inputRsrvEmail.value!=='' && $inputRsrvDate.value!==''
+           && $inputRsrvPersons.value!=='' && $txtRsrvComment.value!==''){
+            $.post("/submit/reservation-form",$reservationData )
+            .done(function( data ) {
+              $("#contact-modal-title").html("Sending Form")
+              tempHtmlReservation+="<p>The form was sent successfully, with the Following data:</p>";
+              if(data){
+                tempHtmlReservation+='<ul>';
+                tempHtmlReservation+='<li><p>Full Name: '+data.full_name+'</p></li>';
+                tempHtmlReservation+='<li><p>Telephone: '+data.telephone+'</p></li>';
+                tempHtmlReservation+='<li><p>Email: '+data.email+'</p></li>';
+                tempHtmlReservation+='<li><p>Date: '+data.date_of_reservation+'</p></li>';
+                tempHtmlReservation+='<li><p>Persons: '+data.quantity_of_persons+'</p></li>';
+                tempHtmlReservation+='<li><p>Comment: '+data.comment+'</p></li>';
+                tempHtmlReservation+='</ul>';
+              }
+              $("#contact-modal-content").html(tempHtmlReservation);
+              setTimeout(() => {
+                $('#contact_modal_dialog').toggleClass('opened');
+              }, 500);
+            })
+            .fail(function(err) {
+              $("#contact-modal-title").html("Error Sending Form")
+              $("#contact-modal-content").html("<p>The form wasn't sent successfully.</p>");
+              setTimeout(() => {
+                $('#contact_modal_dialog').toggleClass('opened');
+              }, 500);
+              console.log( "An error occurs on submit.reservationForm=> "+err );
+            })
+        }
+        else{
+          $("#contact-modal-title").html("Error Sending Form")
+          $("#contact-modal-content").html("<p>The form wasn't sent successfully, all the fields are required.</p>");
+          setTimeout(() => {
+            $('#contact_modal_dialog').toggleClass('opened');
+          }, 500);
+        }
+    });
+    $('.btn_close').on('click',function(){
+      $('#contact_modal_dialog').toggleClass('opened');
+    });
     $('#nav_icon').on('click',function(){
       $(this).toggleClass('open');
       $('#nav_menu_ul').fadeToggle('fast',function(){});
       $('.collapse').fadeToggle('slow',function(){});
-      /* if($windowWidth<=1024 || $documentWidth<=1024){
-          $('#nav_menu').toggleClass('menu_tablet_opened');
-      } */
       $('body').toggleClass('opened_nav');
     });
     $(".nav.navbar-nav a").on('click',function(){
       $(".nav.navbar-nav a").each(function(){
         $(this).removeClass('current_nav')
-      })
+      });
       $(this).addClass('current_nav')
     })
-    /*
-    $('ul#nav_menu_ul li').on('click',function(){
-        if($windowWidth<=1024 || $documentWidth<=1024 && $('#nav_icon').is('.open')  && $('#nav_menu').is('.menu_tablet_opened')){
-          $('#nav_menu').toggleClass('menu_tablet_opened');
-          $('#nav_icon').toggleClass('open');
-          $('.collapse').fadeToggle('slow',function(){});
-          $('#nav_menu_ul').fadeToggle('fast',function(){});
-      }
-    });
-    $('ul.dropdown-menu li a').on('click',function(){
-        if($windowWidth<=1024 || $documentWidth<=1024 && $('#nav_icon').is('.open') 
-          && $('#nav_menu').is('.menu_tablet_opened')){
-          $('.collapse').fadeToggle('slow',function(){});
-          $('#nav_menu_ul').fadeToggle('fast',function(){});
-      }
-    });
-    */
     $(".btn-menu").click(function() {
         $('html, body').animate({
             scrollTop:$($(this).attr('href')).offset().top
         }, 1600);
-        console.log($(this).attr('href'));
-        
     });
     $(document).ready(function(){
       $('.datepicker').datetimepicker();
@@ -281,7 +375,7 @@
       setTimeout(() => {
         $('.caption_slide').addClass('active animated fadeInLeft')
       }, 800);
-    })
+    });
     var swiper = new Swiper('.swiper-container', {
       pagination: '.swiper-pagination',
       nextButton: '.swiper-button-next',

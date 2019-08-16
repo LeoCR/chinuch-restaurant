@@ -29,4 +29,5 @@ db.ingredient=require(path.resolve(__dirname+'/../model/ingredient.model.js'))(s
 db.ingredientDish=require(path.resolve(__dirname+'/../model/ingredientDish.model.js'))(sequelize,Sequelize);
 db.invoiceDetail=require(path.resolve(__dirname+'/../model/invoiceDetail.model.js'))(sequelize,Sequelize);
 db.headerInvoice=require(path.resolve(__dirname+'/../model/headerInvoice.model.js'))(sequelize,Sequelize);
+db.reservation=require(path.resolve(__dirname+'/../model/reservation.model.js'))(sequelize,Sequelize);
 module.exports = db;

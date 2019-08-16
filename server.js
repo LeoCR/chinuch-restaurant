@@ -282,6 +282,7 @@ require(path.resolve(__dirname+'/private/app/route/user.route.js'))(app,path,isL
 require(path.resolve(__dirname+'/private/app/route/drink.route.js'))(app,path);
 require(path.resolve(__dirname+'/private/app/route/ingredient.route.js'))(app,path);
 require(path.resolve(__dirname+'/private/app/route/invoice.route.js'))(app,path,isLoggedIn);
+require(path.resolve(__dirname+'/private/app/route/reservation.route.js'))(app,path);
 //load passport strategies
 require(path.resolve(__dirname+'/private/app/db/config/passport/passport.js'))(passport, models.user);
 require(path.resolve(__dirname+'/private/app/route/auth.route.js'))(app,passport,path,User,jwt); 

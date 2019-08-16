@@ -377,8 +377,12 @@ margin: 5px;
     border:1px solid #f9b868 !important;
   }
 }
-.modal-opened .modal{
+.modal-opened #modal-shopping-cart,
+#contact_modal_dialog.opened{
   display: block !important;
+}
+.modal-opened #contact_modal_dialog{
+  display: none !important;
 }
 .show{
   display: block !important;
