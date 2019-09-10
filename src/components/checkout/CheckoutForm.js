@@ -159,14 +159,22 @@ class CheckoutForm extends React.Component{
             var date=new Date();
             var todayIs='';
             var total=0;
+            
+            var date=new Date();
             var currentMonth;
             if(date.getMonth()<10){
-                currentMonth='0'+date.getMonth();
+                if(date.getMonth()<9){
+                    currentMonth='0'+parseInt(date.getMonth()+1);
+                }
+                else{
+                    currentMonth=parseInt(date.getMonth()+1);
+                }
             }
             else{
-                currentMonth=date.getMonth();
+                currentMonth=parseInt(date.getMonth()+1);
             }
-            todayIs=date.getFullYear()+'-'+currentMonth+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
+            var todayIs=date.getFullYear()+'-'+currentMonth+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
+
             if(this.props.orders){
                 var i=0;
                 var tempNextIdInvoiceDetail=this.state.nextIdInvoiceDetail;
@@ -265,6 +273,7 @@ class CheckoutForm extends React.Component{
                 nextOrderCode:'INVC'+tempNexOrder
             })
         })
+        
     }
     renderYears=()=>{
         var currentYear= new Date().getFullYear();
