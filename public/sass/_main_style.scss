@@ -133,6 +133,11 @@ section#servicio_express, #menu, #catalogo_de_platos_fuertes, #catalogo_de_desay
   width: 100%;
   padding: 0 2%;
   min-height: 450px;
+  h1{
+    text-align: center;
+    margin:0 auto;
+    padding-right: 130px;
+  }
 }
 .content_about_us {
   background: white;
@@ -640,6 +645,14 @@ color: #000 !important;
     max-height: 50px;
     float: left;
     position: relative;
+  }
+}
+.error-password{
+  margin-top: 18px;
+}
+@media (max-width:980px){
+  #container-menu h1{
+    padding-right: 0;
   }
 }
 @media (max-width: 580px) {

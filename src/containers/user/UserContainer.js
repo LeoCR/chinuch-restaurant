@@ -3,6 +3,8 @@ import { Route, Link,Switch } from "react-router-dom";
 import UserProfile from '../../components/user/UserProfile';
 import UserHistory from '../../components/user/UserHistory';
 import UserInvoice from "../../components/user/UserInvoice";
+import {connect} from "react-redux";
+import { withRouter } from "react-router";
 import $ from 'jquery';
 class UserContainer extends React.Component{
     tabClicked=(e)=>{
@@ -56,5 +58,9 @@ class UserContainer extends React.Component{
         )
     }
 }
-
-export default UserContainer;
+const mapStateToProps=(state)=>{
+    return{
+      user:state.user.user
+    }
+}
+export default withRouter(connect(mapStateToProps)(UserContainer));

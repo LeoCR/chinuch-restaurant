@@ -268,7 +268,7 @@ class CheckoutForm extends React.Component{
         }, 700);
         await api.get('/api/count-max-order-code')
         .then((res)=>{
-            var tempNexOrder=parseInt(res.data[0].maxordercode)+1;
+            var tempNexOrder=parseInt(res.data[0].maxOrderCode)+1;
             _this.setState({
                 nextOrderCode:'INVC'+tempNexOrder
             })

@@ -3,6 +3,7 @@ import { Switch, Route, Link } from "react-router-dom";
 import Checkout from '../../components/checkout/Checkout';
 import {connect} from 'react-redux';
 import {setOrders,deleteFromCart} from '../../actions/cartActions';
+import { withRouter } from "react-router";
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 class OrderContainer extends React.Component{
@@ -122,8 +123,11 @@ class OrderContainer extends React.Component{
                     <Route exact 
                     path="/payment-successfully" 
                     render={()=><React.Fragment>
-                            <h1>Payment Successfully</h1>
-                            <p>Thanks by your purchase</p>
+                            <div style={{padding:'20px',width:'100%',position:'relative'}}>
+                                <h1>Payment Successfully</h1>
+                                <p>Thanks by your purchase</p>
+                                <a className="btn btn-danger" href='/user/history' target="_parent">View Invoices</a>
+                            </div>
                     </React.Fragment>} 
                     />
                 </Switch>
@@ -133,7 +137,8 @@ class OrderContainer extends React.Component{
 }
 const mapStateToProps=(state)=>{
     return{
-      orders:state.orders
+      orders:state.orders,
+      user:state.user.user
     }
 }
-export default connect(mapStateToProps,{setOrders,deleteFromCart})(OrderContainer)
+export default withRouter(connect(mapStateToProps,{setOrders,deleteFromCart})(OrderContainer))

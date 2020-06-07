@@ -6,7 +6,7 @@ class UserHistory extends React.Component{
     state={
         invoices:[]
     }
-    componentDidMount=async()=>{
+    setInvoices=async()=>{
         await api.get('/api/get-invoices/'+this.props.user.id)
         .then((res)=>{
             if(res.data.length>0){
@@ -15,6 +15,9 @@ class UserHistory extends React.Component{
                 })        
             }
         });
+    }
+    componentDidMount=()=>{
+        this.setInvoices();
     }
     getInvoices=()=>{
         if(this.state.invoices.length>0){
@@ -40,6 +43,9 @@ class UserHistory extends React.Component{
                     </table>
                 </div>
           )  
+        }
+        else{
+            this.setInvoices();
         }
     }
     render(){

@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
 const path = require('path');
-const sequelize = new Sequelize('reef_chinuch_restaurant', 'leo', '79461313', {
+const sequelize = new Sequelize('reef_chinuch_restaurant', 'root', '79461313', {
   host: 'localhost',
-  dialect: 'postgres',
+  dialect: 'mysql',
   define: {
     charset: 'utf8',
     collate: 'utf8_general_ci',
@@ -10,7 +10,7 @@ const sequelize = new Sequelize('reef_chinuch_restaurant', 'leo', '79461313', {
     underscored: true,
     timestamps: false
 },
-  port: "5432",
+  port: "3306",
   pool: {
     max: 10500,
     min: 0,

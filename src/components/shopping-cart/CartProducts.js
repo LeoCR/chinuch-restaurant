@@ -53,6 +53,9 @@ class CartProducts extends React.Component{
   goToMenu=(e)=>{
     e.preventDefault();
     window.location.replace("/#menu");
+    $('.modal').css({'display':'none'});
+    $('body').toggleClass('modal-opened');
+    $('body').removeClass('signup');
   }
     render(){
       var orders=this.props.orders.orders;
@@ -61,7 +64,7 @@ class CartProducts extends React.Component{
             return(
                 <div className="modal-body">
                     Your cart is Empty
-                    <button className="btn btn-success" onClick={(e)=>this.goToMenu(e)}>Go to Cart</button>
+                    <button className="btn btn-success" onClick={(e)=>this.goToMenu(e)}>Go to Menu</button>
                 </div>
             )
       } 
