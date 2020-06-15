@@ -13,8 +13,6 @@ class Checkout extends React.Component{
     componentDidMount(){
         this.props.clearPaypalItems();
         const {orders}=this.props.orders; 
-        console.log(cookies.get('reef_chinuch_orders'));
-        
         for (let m = 0; m < orders.length; m++) {
             var tempItem={};
             tempItem.name=orders[m].name;

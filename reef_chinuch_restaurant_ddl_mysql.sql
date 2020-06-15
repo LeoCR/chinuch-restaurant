@@ -2,15 +2,6 @@ DROP DATABASE reef_chinuch_restaurant;
 
 CREATE DATABASE reef_chinuch_restaurant;
 
-DROP TABLE IF EXISTS drink;
-DROP TABLE IF EXISTS ingredient_dish;
-DROP TABLE IF EXISTS ingredient;
-DROP TABLE IF EXISTS reservation;
-DROP TABLE IF EXISTS invoice_detail;
-DROP TABLE IF EXISTS header_invoice;
-DROP TABLE IF EXISTS dish;
-DROP TABLE IF EXISTS reef_user;
-
 use reef_chinuch_restaurant;
 
 CREATE TABLE IF NOT EXISTS ingredient(

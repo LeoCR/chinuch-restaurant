@@ -120,8 +120,7 @@ class CheckoutForm extends React.Component{
         }
     }
     onSubmitCheckoutForm=async (event)=>{
-        event.preventDefault();
-        var tempNextHeaderInvoice=this.state.nextHeaderInvoice;
+        event.preventDefault(); 
         var _this=this;
         if(this.state.errorDate!==''){
             $('.error-date').css({'display':'block'});
@@ -175,6 +174,7 @@ class CheckoutForm extends React.Component{
 
             if(this.props.orders){
                 var i=0;
+                var tempNextHeaderInvoice=this.state.nextHeaderInvoice;
                 var tempNextIdInvoiceDetail=this.state.nextIdInvoiceDetail;
                 var tempNextIdHeader=this.state.nextIdHeader;
                 do{
@@ -223,7 +223,7 @@ class CheckoutForm extends React.Component{
                 while(i<=this.props.orders.orders.length)
                 setTimeout(() => {
                     window.location.replace('/payment-successfully');
-                    cookies.remove('reef_chinuch_orders')
+                    cookies.set('reef_chinuch_orders','[]',{path:'/'})
                     _this.props.deleteOrders();
                     _this.props.getOrders();
                 }, 3900);

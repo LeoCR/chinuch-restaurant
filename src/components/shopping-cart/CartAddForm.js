@@ -32,7 +32,7 @@ class CartAddForm extends React.Component{
         this.props.calculateOrders();
         var _this=this;
         setTimeout(() => {
-            cookies.set('reef_chinuch_orders', JSON.stringify(_this.props.orders.orders));
+            cookies.set('reef_chinuch_orders', JSON.stringify(_this.props.orders.orders),{path:'/'});
         }, 300);
     }
     decrement=(e)=>{
@@ -47,7 +47,7 @@ class CartAddForm extends React.Component{
         this.props.calculateOrders();
         var _this=this;
         setTimeout(() => {
-            cookies.set('reef_chinuch_orders', JSON.stringify(_this.props.orders.orders));
+            cookies.set('reef_chinuch_orders', JSON.stringify(_this.props.orders.orders),{path:'/'});
         }, 300);
     }
     increment=(e)=>{
@@ -59,7 +59,7 @@ class CartAddForm extends React.Component{
         this.props.calculateOrders();
         var _this=this;
         setTimeout(() => {
-            cookies.set('reef_chinuch_orders', JSON.stringify(_this.props.orders.orders));
+            cookies.set('reef_chinuch_orders', JSON.stringify(_this.props.orders.orders),{path:'/'});
         }, 300);
     }
     componentDidMount(){

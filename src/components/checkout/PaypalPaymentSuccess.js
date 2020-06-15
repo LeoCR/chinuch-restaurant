@@ -4,9 +4,10 @@ import {connect} from 'react-redux';
 import getParameterByName from '../../utils/getParameterByName';
 import Cookies from 'universal-cookie';
 import {getOrders,deleteOrders} from '../../actions/cartActions';
+import {clearInvoiceDetails} from '../../actions/invoiceDetailActions';
+import {clearHeaderInvoice} from '../../actions/headerInvoiceActions';
 const cookies = new Cookies();
-class PaypalPaymentSuccess extends React.Component{
-    
+class PaypalPaymentSuccess extends React.Component{ 
     constructor (props) {
         super(props);
         this.state = {
@@ -15,11 +16,11 @@ class PaypalPaymentSuccess extends React.Component{
             nextHeaderInvoice:0,
             nextIdInvoiceDetail:0,
             nextIdHeader:0,
-            nextOrderCode:''
+            nextOrderCode:'',
+            isLoading:true
         }
     }
-    componentDidMount=async()=>{
-        var tempNextHeaderInvoice=this.state.nextHeaderInvoice;
+    componentDidMount=async()=>{  
         var _this=this;
         var tempSubtotal=0; 
         try {
@@ -33,8 +34,7 @@ class PaypalPaymentSuccess extends React.Component{
                 subtotal:parseFloat(tempSubtotal).toFixed(2)
             });
             var date=new Date();
-            var todayIs='';
-            var total=0;
+            var todayIs=''; 
             var currentMonth;
             var _this=this;
             if(date.getMonth()<10){
@@ -94,6 +94,7 @@ class PaypalPaymentSuccess extends React.Component{
                     if(this.props.orders){
                         var i=0;
                         var tempNextIdInvoiceDetail=this.state.nextIdInvoiceDetail;
+                        var tempNextHeaderInvoice=this.state.nextHeaderInvoice;
                         var tempNextIdHeader=this.state.nextIdHeader;
                         do{
                             if(this.props.orders.orders[i]!==undefined){
@@ -133,8 +134,8 @@ class PaypalPaymentSuccess extends React.Component{
                                     .catch(err=>{
                                         console.log('An error occurs on post(/api/add/invoice)');
                                         console.error(err);
-                                    })
-                                    console.log(invoiceDetail);
+                                    }) 
+                                    console.log(headerInvoice);
                                     
                                     tempNextIdHeader++;
                                     tempNextIdInvoiceDetail++;
@@ -148,9 +149,14 @@ class PaypalPaymentSuccess extends React.Component{
                             cookies.set("reef_chinuch_orders",'[]', {path: "/"})
                             _this.props.deleteOrders();
                             _this.props.getOrders();
-                        }, 3900);
+                            _this.props.clearInvoiceDetails();
+                            _this.props.clearHeaderInvoice();
+                            _this.setState({
+                                isLoading:false
+                            })
+                        }, 1200);
                     }
-                }, 3000);
+                }, 1000);
             }
         } catch (error) {
             console.log('An error occurs in PaypalPaymentSuccess.componentDidMount()');
@@ -160,11 +166,15 @@ class PaypalPaymentSuccess extends React.Component{
     render(){
         return(
             <React.Fragment>
-                <div style={{padding:'20px',width:'100%',position:'relative'}}>
-                    <h1>Payment Successfully</h1>
-                    <p>Thanks by your purchase</p>
-                    <a className="btn btn-danger" href='/user/history' target="_parent">View Invoices</a>
-                </div>
+                {
+                    this.state.isLoading?<h2>Processing payment transaction,please wait...</h2>:<React.Fragment>
+                        <div style={{padding:'20px',width:'100%',position:'relative'}}>
+                            <h1>Payment Successfully</h1>
+                            <p>Thanks by your purchase</p>
+                            <a className="btn btn-danger" href='/user/history' target="_parent">View Invoices</a>
+                        </div>
+                    </React.Fragment>
+                }
             </React.Fragment>
         )
     }
@@ -177,4 +187,4 @@ const mapStateToProps=(state)=>{
         paypalItems:state.paypalItems
     }
 }
-export default connect(mapStateToProps,{getOrders,deleteOrders})(PaypalPaymentSuccess);
+export default connect(mapStateToProps,{getOrders,deleteOrders,clearInvoiceDetails,clearHeaderInvoice})(PaypalPaymentSuccess);

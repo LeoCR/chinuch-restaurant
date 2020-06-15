@@ -315,8 +315,7 @@ app.post('/api/pay-with-paypal',async(req,res)=>{
     TempData={
       id:response.result.id,
       data:response.result.links[1]
-    };
-    console.log(response.result.links[1]);
+    }; 
     return res.send(TempData)
   } catch (error) {
     return res.send(error);

@@ -98,12 +98,7 @@ class CheckoutPaypalForm extends React.Component{
                 subtotal:tempSubtotal
             });
             
-            if(this.state.isValid){
-                var shipping="0";
-                var tax="0.15";
-                var tempTotal=parseFloat(this.state.subtotal)+parseFloat(tax)+parseFloat(shipping);
-                cookies.set('restaurant_total', tempTotal);
-                
+            if(this.state.isValid){ 
                 var date=new Date();
                 var todayIs='';
                 var currentMonth;
@@ -142,6 +137,7 @@ class CheckoutPaypalForm extends React.Component{
                                 tempNextIdHeader++;
                                 tempNextIdInvoiceDetail++;
                                 tempNextHeaderInvoice++;
+                                console.log(headerInvoice);
                                 headerInvoices.push(headerInvoice);
                                 invoiceDetails.push(invoiceDetail);
                             }
@@ -157,28 +153,22 @@ class CheckoutPaypalForm extends React.Component{
                         item_total:itemTotal.toFixed(2),
                         tax_total:taxTotal
                     };
-                    
+                    console.log(tempJSON) 
                         api.post('/api/pay-with-paypal',tempJSON)
                         .then((res)=>{
-                            console.log('Paypal Success response');
-                            try {
+                            console.log('Paypal Success response'); 
                                 setTimeout(() => {
                                     resolve('resolved');
                                 }, 2300);
                                 cookies.set('paypal_id',res.data.id);
                                 window.location.href =res.data.data.href;
-                                console.log(res);
-                            } catch (error) {
-                                reject(error)   
-                            }  
+                                console.log(res); 
                         }) 
                         .catch(function (error) {
                             console.log('An error occurs on post submitPaypalForm()');
                             console.log(error);
                             reject(error)
-                        });
-                    
-                    console.log(tempJSON);
+                        }); 
                     
                 }
             }
