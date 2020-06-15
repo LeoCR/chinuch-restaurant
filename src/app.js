@@ -5,8 +5,16 @@ import MainApp from './containers/MainApp';
 /**
  * @see https://alligator.io/react/react-router-ssr/
  */
-ReactDOM.hydrate(
+var AppContainer = document.getElementById("menu-container");
+ 
+    //If it isn't "undefined" and it isn't "null", then it exists.
+if(typeof(AppContainer) != 'undefined' && AppContainer != null){
+    ReactDOM.hydrate(
         <MainApp/>
-    , document.getElementById('menu-container')
+    , AppContainer
 );
+} else{
+    console.log('AppContainer does not exist!');
+}
+
 

@@ -71,7 +71,7 @@ class CheckoutApp extends React.Component {
         const orderObject = Object.assign({quantity: quantity}, this.state.product);
         this.props.addToCart(orderObject);
         this.calculateOrders();
-        cookies.set('reef_chinuch_orders', JSON.stringify(this.props.orders.orders));
+        cookies.set('reef_chinuch_orders', JSON.stringify(this.props.orders.orders), {path: "/"});
     }
     setShowLogin=()=>{
         $('body').removeClass('signup');

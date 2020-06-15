@@ -11,7 +11,7 @@ class CartProducts extends React.Component{
       this.props.calculateOrders();
       var _this=this;
       setTimeout(() => {
-        cookies.set('reef_chinuch_orders', JSON.stringify(_this.props.orders.orders));
+        cookies.set('reef_chinuch_orders', JSON.stringify(_this.props.orders.orders), {path: "/"});
       }, 300);
   }
   checkout=(e)=>{
@@ -27,14 +27,14 @@ class CartProducts extends React.Component{
     }
     this.props.updateItemUnits(order);
     this.props.calculateOrders();
-    cookies.set('reef_chinuch_orders', JSON.stringify(this.props.orders.orders));
+    cookies.set('reef_chinuch_orders', JSON.stringify(this.props.orders.orders), {path: "/"});
   }
   incrementOrder=(order)=>{
     order.quantity=order.quantity+1;
     $('#quantity-added').val(order.quantity);
     this.props.updateItemUnits(order);
     this.props.calculateOrders();
-    cookies.set('reef_chinuch_orders', JSON.stringify(this.props.orders.orders));
+    cookies.set('reef_chinuch_orders', JSON.stringify(this.props.orders.orders), {path: "/"});
   }
   calculateTotal=()=>{
     var orders=this.props.orders.orders,

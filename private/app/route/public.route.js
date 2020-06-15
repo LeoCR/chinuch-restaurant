@@ -34,6 +34,8 @@ module.exports = function(app,express,path,isLoggedIn) {
             res.send({contact:null})
         }
     })
+    app.use(['/paypal/payment/','/paypal/payment/js/'], express.static(__dirname + '/../../../../chinuch-restaurant/build'));
+    app.use(['/paypal/payment/js','/checkout/js'], express.static(__dirname + '/../../../../chinuch-restaurant/public/js'))
     app.get('/api/dish/ingredients/:id',publicController.findIngredients);
     app.use("/img", express.static(__dirname + '/../../../../chinuch-restaurant/public/images'));
     app.use("/img/uploads",express.static(__dirname+'/../../../../chinuch-restaurant/public/images/uploads'))

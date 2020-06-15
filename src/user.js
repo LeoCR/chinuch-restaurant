@@ -5,8 +5,15 @@ import MainUserApp from './containers/user/MainUserApp';
 /**
  * @see https://alligator.io/react/react-router-ssr/
  */
-ReactDOM.hydrate(
+var UserContainer = document.getElementById("user");
+ 
+    //If it isn't "undefined" and it isn't "null", then it exists.
+if(typeof(UserContainer) != 'undefined' && UserContainer != null){
+    ReactDOM.hydrate(
         <MainUserApp/>
-    , document.getElementById('user')
+    , UserContainer
 );
+} else{
+    console.log('Element does not exist!');
+}
 

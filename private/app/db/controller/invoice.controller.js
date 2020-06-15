@@ -57,12 +57,14 @@ exports.createInvoice=(req,res)=>{
         client_restaurant:req.body.invoiceDetail.client_restaurant,
         header_invoice:req.body.invoiceDetail.header_invoice,
         order_code:req.body.invoiceDetail.order_code,
-        date_of_billing:req.body.invoiceDetail.date_of_billing
+        date_of_billing:req.body.invoiceDetail.date_of_billing,
+        paypal_id:req.body.invoiceDetail.paypal_id,
+        paypal_payer_id:req.body.invoiceDetail.paypal_payer_id,
+        paypal_token:req.body.invoiceDetail.paypal_token,
     })
     .then(invoice=>{
         res.send(invoice);
     }).catch(err => {
-        console.log(err);
         res.status(500).json({msg: "error", details: err});
     });
 }

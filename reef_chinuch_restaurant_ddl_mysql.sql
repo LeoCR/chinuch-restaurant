@@ -1,3 +1,5 @@
+DROP DATABASE reef_chinuch_restaurant;
+
 CREATE DATABASE reef_chinuch_restaurant;
 
 DROP TABLE IF EXISTS drink;
@@ -88,6 +90,9 @@ CREATE TABLE IF NOT EXISTS invoice_detail(
     header_invoice INT NOT NULL,
     order_code VARCHAR(250) NOT NULL,
     date_of_billing timestamp NOT NULL,
+    paypal_id VARCHAR(250),
+    paypal_payer_id VARCHAR(250),
+    paypal_token VARCHAR(250), 
     CONSTRAINT FK_ClientInvoiceDetail FOREIGN KEY (client_restaurant) REFERENCES reef_user(id) ON DELETE CASCADE,
     CONSTRAINT FK_HeaderInvoiceDetail FOREIGN KEY (header_invoice) REFERENCES header_invoice(id_header) ON DELETE CASCADE
 );
@@ -307,5 +312,5 @@ NULL,'active',NULL,NULL,'system','');
 INSERT INTO header_invoice (id_header, total,product_id,product_name,product_quantity) VALUES(1,15,'3APPTZR','Grilled Salmon Salad',2);
 INSERT INTO header_invoice (id_header, total,product_id,product_name,product_quantity) VALUES(2,15,'8DESRT','Brownie with Ice Cream',2);
 
-INSERT INTO invoice_detail VALUES(1,1,1,'INVC1','2019-03-12 02:30:00');
-INSERT INTO invoice_detail VALUES(2,1,2,'INVC1','2019-03-12 02:30:00');
+INSERT INTO invoice_detail VALUES(1,1,1,'INVC1','2019-03-12 02:30:00','','','');
+INSERT INTO invoice_detail VALUES(2,1,2,'INVC1','2019-03-12 02:30:00','','','');

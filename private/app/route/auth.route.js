@@ -1,7 +1,6 @@
-module.exports = function(app, passport,path,User,jwt) {
+module.exports = function(app, passport,path) {
     var authController = require(path.resolve(__dirname+'/../db/controller/auth.controller.js'));
-    var secretKey='943rjkhsOA)JAQ@#';
-    //app.get('/api/logout', authController.logout);
+    app.get('/api/logout', authController.logout);
     app.post('/api/signup', passport.authenticate('local-signup', {
         successRedirect: '/user',
         failureRedirect: '/'
@@ -23,7 +22,7 @@ module.exports = function(app, passport,path,User,jwt) {
             req.logIn(user, function(err) {
             if (err) { 
                 return next(err);
-            }
+            }/*
             jwt.sign({user},secretKey,(err,token)=>{
                 if(err){
                     return res.send({msg:"An error occurs on /api/login jwt.sign(): ",error:err});
@@ -32,7 +31,10 @@ module.exports = function(app, passport,path,User,jwt) {
                     res.cookie("userData", {user,token}); 
                     return res.send({user,token});
                 }
-            }); 
+            });
+            res.cookie("userData", {user}); */
+            return res.send({user});
+
         });
     })(req, res, next);
   });

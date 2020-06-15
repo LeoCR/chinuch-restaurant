@@ -333,37 +333,6 @@
       setTimeout(() => {
         $('.caption_slide').addClass('active animated fadeInLeft')
       }, 800);
-    });
-    var swiper = new Swiper('.swiper-container', {
-      pagination: '.swiper-pagination',
-      nextButton: '.swiper-button-next',
-      prevButton: '.swiper-button-prev',
-      slidesPerView: 1,
-      paginationClickable: true,
-      // spaceBetween: 30, 
-      speed: 600,
-      loop: true,
-      // spaceBetween: 30,
-      // centeredSlides: true,
-      autoplay:8500,
-      autoplayDisableOnInteraction: false
-  });
-  swiper.on('transitionStart',function(){   
-    $('.caption_slide').each(function( index ) {
-      $( this ).removeClass('active animated');
-    });
-  });
-  swiper.on('transitionEnd',function(){
-    setTimeout(() => {
-      $('.caption_slide').each(function( index ) {
-          $(this).addClass('active animated fadeInLeft')
-      })
-    }, 300);
-  }); 
-  swiper.on('touchStart sliderMove',function(){     
-    $('.caption_slide').each(function( index ) {
-      $( this ).removeClass('active animated fadeInLeft');
-    });
-  }); 
+    }); 
   </script>
 </html>

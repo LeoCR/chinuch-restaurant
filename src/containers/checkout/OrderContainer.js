@@ -1,18 +1,21 @@
 import React from "react";
 import { Switch, Route, Link } from "react-router-dom";
 import Checkout from '../../components/checkout/Checkout';
+import PaypalPaymentSuccess from '../../components/checkout/PaypalPaymentSuccess';
 import {connect} from 'react-redux';
 import {setOrders,deleteFromCart} from '../../actions/cartActions';
-import { withRouter } from "react-router";
+import {deletePaypalItemsFromCart} from '../../actions/paypalActions';
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 class OrderContainer extends React.Component{
-    deleteOrder=(order,e)=>{
+    deleteOrder=(e,order)=>{
         e.preventDefault();
+        console.log(order);
         this.props.deleteFromCart(order.id);
+        this.props.deletePaypalItemsFromCart(order.id);
         var _this=this;
         setTimeout(() => {
-            cookies.set('reef_chinuch_orders', JSON.stringify(_this.props.orders.orders));
+            cookies.set('reef_chinuch_orders', JSON.stringify(_this.props.orders.orders), {path: "/"});
         }, 300);
     }
     componentDidMount(){
@@ -45,13 +48,13 @@ class OrderContainer extends React.Component{
                                             <li className="orders list-group-item" key={order.id} >
                                                 <div className="order-item" key={order.id}>
                                                     <div className="order-item-left-side">
-                                                        <h3>  {order.name}</h3>
-                                                        <h5>Quantity:  {order.quantity}</h5>    
-                                                        <p>Price per unit:<span className="badge badge-warning text-dark">${order.price}</span></p>
+                                                        <h3 id="order_name">  {order.name}</h3>
+                                                        <h5 id="order_quantity">Quantity:  {order.quantity}</h5>    
+                                                        <p id="price_per_unit">Price per unit:<span className="badge badge-warning text-dark">${order.price}</span></p>
                                                         <img src={order.picture} alt={order.name} style={{maxWidth:"80px"}}/>
                                                     </div>
                                                     <div className="order-item-right-side">
-                                                        <button className="btn btn-danger" onClick={(e)=>this.deleteOrder(order,e)}>X</button>
+                                                        <button className="btn btn-danger" onClick={(e)=>this.deleteOrder(e,order)}>X</button>
                                                     </div>
                                                 </div>
                                             </li>
@@ -117,7 +120,7 @@ class OrderContainer extends React.Component{
                         render={() =><React.Fragment>
                             {this.renderOrders()}
                             {this.calculateTotal()}
-                             <Checkout/>
+                            <Checkout/>
                         </React.Fragment>}
                     />
                     <Route exact 
@@ -130,6 +133,12 @@ class OrderContainer extends React.Component{
                             </div>
                     </React.Fragment>} 
                     />
+                    <Route exact 
+                    path="/paypal/payment/success" 
+                    render={()=><React.Fragment>
+                                <PaypalPaymentSuccess/>                
+                                </React.Fragment>} 
+                    />
                 </Switch>
             </React.Fragment>
         )
@@ -138,7 +147,8 @@ class OrderContainer extends React.Component{
 const mapStateToProps=(state)=>{
     return{
       orders:state.orders,
-      user:state.user.user
+      user:state.user.user,
+      paypalItems:state.paypalItems
     }
 }
-export default withRouter(connect(mapStateToProps,{setOrders,deleteFromCart})(OrderContainer))
+export default connect(mapStateToProps,{setOrders,deleteFromCart,deletePaypalItemsFromCart})(OrderContainer)

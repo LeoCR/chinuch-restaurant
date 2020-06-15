@@ -650,6 +650,43 @@ color: #000 !important;
 .error-password{
   margin-top: 18px;
 }
+.ld-spin{
+  background: url("/images/spin.gif") no-repeat center;
+  z-index: 999 !important;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  float: right;
+  -webkit-animation: spinnner 2s infinite ease;
+  animation: spinnner 2s infinite ease;
+  display: none;
+}
+.running .ld-spin{
+  display: block;
+}
+.badge-success{
+  background: #28a745 !important;
+}
+@-webkit-keyframes spinnner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes spinnner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
 @media (max-width:980px){
   #container-menu h1{
     padding-right: 0;

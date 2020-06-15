@@ -18,9 +18,21 @@ import { appendUniversalPortals } from "react-portal-universal/lib/server";
 import FacebookStrategy from 'passport-facebook';
 import compression from 'compression';
 import methodOverride from 'method-override';
-import jwt from 'jsonwebtoken';
+//import paypal from 'paypal-rest-sdk';
 import cookieParser from 'cookie-parser';
+import paypal from '@paypal/checkout-server-sdk';
+require('https').globalAgent.options.ca = require('ssl-root-cas/latest').create();
 
+/**
+* @see https://github.com/paypal/Checkout-NodeJS-SDK
+* @see https://developer.paypal.com/docs/api/orders/v2/
+* @see https://developer.paypal.com/docs/api/reference/api-requests/#
+*/
+// Creating an environment
+let clientId = "AT20D6Vyit9Nlal8G1lic-3t8cBO51TBfeQC3ZIWUlvbBcW9pealAB9ORvnLGI42eYf4qs03xr5eX9r3";
+let clientSecret = "ELFcF3ADCUW6rmdSMC5JNIvUYwn8V9VYPHVqOy58V2ORWrqqbP1CKv2Kw1vX_NE2_br-7GyRHIShpRV5";
+let environment = new paypal.core.SandboxEnvironment(clientId, clientSecret);
+let client = new paypal.core.PayPalHttpClient(environment);
 var GoogleStrategy = require( 'passport-google-oauth2' ).Strategy,
 db = require(path.resolve(__dirname+'/private/app/db/config/config.js')),
 app = express(),
@@ -116,6 +128,11 @@ var fbCallback=function(accessToken, refreshToken, profile, done) {
   } 
   done(null, profile);
 };
+/* paypal.configure({
+  'mode': 'sandbox', //sandbox or live
+  'client_id': 'AT20D6Vyit9Nlal8G1lic-3t8cBO51TBfeQC3ZIWUlvbBcW9pealAB9ORvnLGI42eYf4qs03xr5eX9r3',
+  'client_secret': 'ELFcF3ADCUW6rmdSMC5JNIvUYwn8V9VYPHVqOy58V2ORWrqqbP1CKv2Kw1vX_NE2_br-7GyRHIShpRV5'
+}); */
 var models = require(path.resolve(__dirname+"/private/app/db/config/config.js"));
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()){
@@ -155,13 +172,13 @@ app.get('/auth/google/callback',
   passport.authenticate('google', { 
     scope:[ 'profile','https://www.googleapis.com/auth/userinfo.profile',
     'https://www.googleapis.com/auth/userinfo.email'],
-    successRedirect: '/user',
+    successRedirect: '/checkout',
     failureRedirect: '/'
   }
 ));
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { 
-    successRedirect: '/user',
+    successRedirect: '/checkout',
     failureRedirect: '/',scope: ["email"] }
 ));
 app.use(compression());
@@ -243,6 +260,118 @@ app.get('/api/validate/authentication',function(req,res){
     res.json({isAuthenticated:false});
   }
 });
+
+app.post('/api/pay-with-paypal',async(req,res)=>{
+  // Here, OrdersCreateRequest() creates a POST request to /v2/checkout/orders
+  let request = new paypal.orders.OrdersCreateRequest();
+  // Construct a request object and set desired parameters
+  request.requestBody({
+      "intent": "CAPTURE",
+      "application_context": {
+          "return_url": "https://localhost:48452/paypal/payment/success",
+          "cancel_url": "https://localhost:48452/paypal/cancel",
+          "brand_name": "React Redux Node-JS Restaurant",
+          "locale": "en-US",
+          "landing_page": "BILLING",
+          "shipping_preference": "NO_SHIPPING",
+          "user_action": "PAY_NOW"
+      },
+      "purchase_units": [
+          {
+              "reference_id": "ReactReduxRestaurant",
+              "description": "Food of Restaurant",
+              "custom_id": "Food",
+              "soft_descriptor": "FoodOfRestaurant",
+              "amount": {
+                  "currency_code": "USD",
+                  "value": req.body.subtotal,
+                  "breakdown": {
+                      "item_total": {
+                          "currency_code": "USD",
+                          "value": req.body.item_total
+                      },
+                      "shipping": {
+                          "currency_code": "USD",
+                          "value": "0"
+                      },
+                      "tax_total": {
+                          "currency_code": "USD",
+                          "value":req.body.tax_total
+                      },
+                      "shipping_discount": {
+                          "currency_code": "USD",
+                          "value": "0"
+                      }
+                  }
+              },
+              "items":req.body.items
+          }
+      ]
+  });
+  var TempData;
+  // Call API with your client and get a response for your call
+  try {
+    let response = await client.execute(request);
+    TempData={
+      id:response.result.id,
+      data:response.result.links[1]
+    };
+    console.log(response.result.links[1]);
+    return res.send(TempData)
+  } catch (error) {
+    return res.send(error);
+  }
+});
+app.get('/paypal/payment/success',(req,res)=>{
+    var payerId=req.query.PayerID,
+    paypalToken=req.query.token;
+    try { 
+        let captureOrder =  async function(orderId) {
+            var request = new paypal.orders.OrdersCaptureRequest(orderId);
+            request.requestBody({});
+            // Call API with your client and get a response for your call
+            let response = await client.execute(request).then((res)=>{
+              console.log(res); 
+              return res;
+            })
+            .catch((e)=>{
+              console.log("An error occurs");
+              return e; 
+            });
+            return response;
+        }
+        if(req.cookies.paypal_id!==undefined&&payerId!==undefined&&paypalToken!==undefined){
+            captureOrder(req.cookies.paypal_id);
+            var context = {};
+            const app = ReactDOMServer.renderToString(
+                <StaticRouter location={req.url} context={context}>
+                  <Provider store={store}>
+                    <CheckoutApp /> 
+                  </Provider>
+                </StaticRouter>
+            );
+            const indexFile = path.resolve(__dirname+'/build/checkout.html');
+            fs.readFile(indexFile, 'utf8', (err, data) => {
+                if (err) {
+                  console.error('Something went wrong:', err);
+                  return res.status(500).send('Oops, better luck next time!');
+                }
+                var tempData=data;
+                tempData.replace('<section id="checkout"></section> ', `<section id="checkout">${app}</section>`) 
+                const markup   = appendUniversalPortals(tempData);
+                return res.send(markup);
+            });
+        }
+        else{
+            return res.send('Sorry this page is unavailable')
+        } 
+    } catch (error) {
+      return res.send(error);
+    }   
+});
+app.get('/paypal/cancel',(req,res)=>{
+  res.send('Cancelled')
+}); 
 app.get(['/main.css','/css/main.css'],function(req,res){
   res.sendFile(path.resolve(__dirname+'/public/css/main.css'))
 })
@@ -285,7 +414,7 @@ require(path.resolve(__dirname+'/private/app/route/invoice.route.js'))(app,path,
 require(path.resolve(__dirname+'/private/app/route/reservation.route.js'))(app,path);
 //load passport strategies
 require(path.resolve(__dirname+'/private/app/db/config/passport/passport.js'))(passport, models.user);
-require(path.resolve(__dirname+'/private/app/route/auth.route.js'))(app,passport,path,User,jwt); 
+require(path.resolve(__dirname+'/private/app/route/auth.route.js'))(app,passport,path); 
 
 app.get('/logout',function(req,res){
   req.session.destroy();

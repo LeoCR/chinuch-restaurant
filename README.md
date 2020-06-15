@@ -1,5 +1,5 @@
 # chinuch-restaurant
-React SSR+Redux+Postgresql+Webpack+Nodejs
+React SSR+Redux+Postgresql or MySQL +Webpack+Nodejs
 
 ## User Interfaces
 

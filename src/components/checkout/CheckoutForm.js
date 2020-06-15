@@ -159,8 +159,6 @@ class CheckoutForm extends React.Component{
             var date=new Date();
             var todayIs='';
             var total=0;
-            
-            var date=new Date();
             var currentMonth;
             if(date.getMonth()<10){
                 if(date.getMonth()<9){
