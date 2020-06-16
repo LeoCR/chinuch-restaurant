@@ -45,7 +45,7 @@ class UserInvoice extends React.Component{
                                     <p style={{color:'#fff'}}>Total :</p>
                                 </td>
                                 <td>
-                                    <p style={{color:'#fff'}}>{totalPrice}</p>
+                                    <p style={{color:'#fff'}}>{totalPrice.toFixed(2)}</p>
                                 </td>
                             </tr>
                         </tbody>        
