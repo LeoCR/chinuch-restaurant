@@ -119,6 +119,13 @@ class CheckoutForm extends React.Component{
             });
         }
     }
+    clickedSubmitBtn=(e)=>{
+        if(this.state.errorCardNumber===''&&this.state.errorPostalCode===''
+        && this.state.errorNameOnCard===''&& this.state.errorCvc===''
+        && this.state.errorDate===''){
+            e.currentTarget.classList.toggle('running');
+        }
+    }
     onSubmitCheckoutForm=async (event)=>{
         event.preventDefault(); 
         var _this=this;
@@ -350,7 +357,10 @@ class CheckoutForm extends React.Component{
                         {this.state.errorPostalCode}
                 </p>
                 <div style={{width:'100%',position:'relative',float:'left'}}>
-                    <button type="submit" className="btn btn-danger">Make Payment</button>
+                    <button type="submit" className="btn btn-danger ld-ext-right" onClick={(e)=>this.clickedSubmitBtn(e)}>
+                        Make Payment
+                        <div className="ld ld-ring ld-spin"></div>
+                    </button>
                 </div>
             </form>
         )
