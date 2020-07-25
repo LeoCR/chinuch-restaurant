@@ -5,22 +5,22 @@
   "main": "main.js",
   "scripts": {
     "start": "nodemon --exec babel-node server.js --presets @babel/preset-env,@babel/preset-react --plugins @babel/plugin-proposal-class-properties,@babel/plugin-transform-runtime",
-    "build": "webpack --config webpack.config.js",
+    "rebuild": "webpack --config webpack.config.js",
     "dev": "webpack --mode development --config webpack.config.js"
   },
   "author": "leonardoAranibarSanchez",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/LeoCR/chinuch-restaurant.git"
+    "url": "https://github.com/LeoCR/react-ssr-redux-shopping-cart.git"
   },
   "keywords": [
     "reactjs"
   ],
   "bugs": {
-    "url": "https://github.com/LeoCR/chinuch-restaurant/issues"
+    "url": "https://github.com/LeoCR/react-ssr-redux-shopping-cart/issues"
   },
-  "homepage": "https://github.com/LeoCR/chinuch-restaurant#readme",
+  "homepage": "https://github.com/LeoCR/react-ssr-redux-shopping-cart#readme",
   "devDependencies": {
     "@babel/cli": "^7.10.1",
     "@babel/core": "^7.10.2",

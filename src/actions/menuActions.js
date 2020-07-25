@@ -5,51 +5,94 @@ import {FETCH_MAIN_COURSES,FETCH_APPETIZERS,
 import api from "../apis/api";
 
 export const fetchDish=id=>async dispatch=>{
-    const response = await api.get('/api/dish/show/'+id);
-    dispatch({
-        type:FETCH_DISH,
-        payload:response.data
-    });
+    return await api.get('/api/dish/show/'+id)
+    .then((res)=>{
+        dispatch({
+            type:FETCH_DISH,
+            payload:res.data
+        });
+    })
+    .catch((err)=>{
+        console.log("An error occurs in menuActions.fetchDish()");
+        console.log(err);
+    })
 }
 export const fetchDrink=id=>async dispatch=>{
-    const response = await api.get('/api/drink/show/'+id)
-    dispatch({
-        type:FETCH_DRINK,
-        payload:response.data
-    });
+    return await api.get('/api/drink/show/'+id)
+    .then((res)=>{
+        dispatch({
+            type:FETCH_DRINK,
+            payload:res.data
+        });
+    })
+    .catch((err)=>{
+        console.log("An error occurs in menuActions.fetchDrink()");
+        console.log(err);
+    })
+    
 }
 export const fetchMainCourses=()=>async dispatch=>{
-    const response = await api.get('/api/get/main-courses');
-    dispatch({
-        type:FETCH_MAIN_COURSES,
-        payload:response.data
-    });
+    return await api.get('/api/get/main-courses')
+    .then((res)=>{
+        dispatch({
+            type:FETCH_MAIN_COURSES,
+            payload:res.data
+        });
+    })
+    .catch((err)=>{
+        console.log("An error occurs in menuActions.fetchMainCourses()");
+        console.log(err);
+    })
 }
 export const fetchAppetizers=()=>async dispatch=>{
-    const response = await api.get('/api/get/appetizers');
-    dispatch({
-        type:FETCH_APPETIZERS,
-        payload:response.data
-    });
+    return await api.get('/api/get/appetizers')
+    .then((res)=>{
+        dispatch({
+            type:FETCH_APPETIZERS,
+            payload:res.data
+        });
+    })
+    .catch((err)=>{
+        console.log("An error occurs in menuActions.fetchAppetizers()");
+        console.log(err);
+    })
 }
 export const fetchDesserts=()=>async dispatch=>{
-    const response = await api.get('/api/get/desserts');
-    dispatch({
-        type:FETCH_DESSERTS,
-        payload:response.data
-    });
+    return await api.get('/api/get/desserts')
+    .then((res)=>{
+        dispatch({
+            type:FETCH_DESSERTS,
+            payload:res.data
+        });
+    })
+    .catch((err)=>{
+        console.log("An error occurs in menuActions.fetchDesserts()");
+        console.log(err);
+    })
 }
 export const fetchDrinks=()=>async dispatch=>{
-    const response = await api.get('/api/get/drinks');
-    dispatch({
-        type:FETCH_DRINKS,
-        payload:response.data
-    });
+    return await api.get('/api/get/drinks')
+    .then((res)=>{
+        dispatch({
+            type:FETCH_DRINKS,
+            payload:res.data
+        });
+    })
+    .catch((err)=>{
+        console.log("An error occurs in menuActions.fetchDrinks()");
+        console.log(err);
+    })
 }
 export const fetchIngredients=(id)=>async dispatch=>{
-    const response = await api.get(`/api/dish/ingredients/${id}`);
-    dispatch({
-        type:FETCH_INGREDIENTS,
-        payload:response.data
+    return await api.get('/api/dish/ingredients/'+id)
+    .then((res)=>{
+        dispatch({
+            type:FETCH_INGREDIENTS,
+            payload:res.data
+        })
+    })
+    .catch((err)=>{
+        console.log("An error occurs in menuActions.fetchIngredients()");
+        console.log(err);
     })
 }
