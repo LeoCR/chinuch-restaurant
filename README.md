@@ -1,5 +1,9 @@
-# chinuch-restaurant
+# React Restaurant Shopping Cart
 React SSR+Redux+Postgresql or MySQL +Webpack+Nodejs
+
+### Demo
+
+<a href="https://reactreduxrestaurant.herokuapp.com">https://reactreduxrestaurant.herokuapp.com</a>
 
 ## User Interfaces
 
