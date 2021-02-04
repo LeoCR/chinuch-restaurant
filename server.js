@@ -400,8 +400,8 @@ app.get(['/checkout.js','/user/profile/checkout.js','/checkout/payment/checkout.
 })
 
 const httpsOptions = {
-  key: fs.readFileSync('/Users/leo/Documents/chinuch-restaurant/private/security/server.key'),
-  cert: fs.readFileSync('/Users/leo/Documents/chinuch-restaurant/private/security/server.crt')
+  key: fs.readFileSync(path.resolve(__dirname+'/private/security/server.key')),
+  cert: fs.readFileSync(path.resolve(__dirname+'/private/security/server.crt'))
 }
 require(path.resolve(__dirname+'/private/app/route/public.route.js'))(app,express,path,isLoggedIn);
 require(path.resolve(__dirname+'/private/app/route/private.route.js'))(app,express,path,isLoggedIn);
