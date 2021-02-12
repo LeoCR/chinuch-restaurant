@@ -1,0 +1,19 @@
+@use "sass:list";
+@use "../variables";
+
+// stylelint-disable property-blacklist
+@mixin transition($transition...) {
+  @if variables.$enable-transitions {
+    @if list.length($transition) == 0 {
+      transition: variables.$transition-base;
+    } @else {
+      transition: $transition;
+    }
+  }
+
+  @if variables.$enable-prefers-reduced-motion-media-query {
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+}
