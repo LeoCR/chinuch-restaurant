@@ -1,7 +1,8 @@
 const Sequelize = require('sequelize');
 const path = require('path');
-const sequelize = new Sequelize('reef_chinuch_restaurant', 'root', '79461313', {
-  host: 'localhost',
+require('dotenv').config()
+const sequelize = new Sequelize(process.env.LOCAL_DATABASE_NAME, process.env.LOCAL_DATABASE_USENAME, process.env.LOCAL_DATABASE_PASSWORD, {
+  host: process.env.LOCAL_HOST,
   dialect: 'mysql',
   define: {
     charset: 'utf8',
