@@ -40,6 +40,9 @@ React SSR+Redux+Postgresql or MySQL +Webpack+Nodejs
 ### Checkout
 <img src="screenshots/checkout.png"/>
 
+### Checkout - Pay with Paypal
+<img src="screenshots/checkout_paypal.png"/>
+
 ## Available Scripts
 
 In the project directory, you can run:
