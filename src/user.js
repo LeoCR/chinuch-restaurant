@@ -14,6 +14,6 @@ if(typeof(UserContainer) != 'undefined' && UserContainer != null){
     , UserContainer
 );
 } else{
-    console.log('Element does not exist!');
+    console.log('MainUserApp does not exist!');
 }
 

@@ -13,6 +13,6 @@ if(typeof(CheckoutContainer) != 'undefined' && CheckoutContainer != null){
     , CheckoutContainer
 );
 } else{
-    console.log('Element does not exist!');
+    console.log('MainCheckoutApp does not exist!');
 }
  

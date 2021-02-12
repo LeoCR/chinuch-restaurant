@@ -1,5 +1,5 @@
 import axios from 'axios';
 export default axios.create({
-    baseURL:'https://localhost:48452',
+    baseURL:'https://leonardoaranibar.co.cr:48452',
     responseType: 'json'
 })

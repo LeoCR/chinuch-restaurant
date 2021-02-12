@@ -4,9 +4,9 @@
   "description": "RestauranteWebsite",
   "main": "main.js",
   "scripts": {
-    "start": "nodemon --exec babel-node server.js --presets @babel/preset-env,@babel/preset-react --plugins @babel/plugin-proposal-class-properties,@babel/plugin-transform-runtime",
     "rebuild": "webpack --config webpack.config.js",
-    "dev": "webpack --mode development --config webpack.config.js"
+    "dev": "webpack --mode development --config webpack.config.js",
+    "start": "babel-node server.js"
   },
   "author": "leonardoAranibarSanchez",
   "license": "ISC",
@@ -38,6 +38,7 @@
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "css-loader": "^3.6.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "file-loader": "^4.3.0",
