@@ -21,7 +21,7 @@ import methodOverride from 'method-override';
 import cookieParser from 'cookie-parser';
 import paypal from '@paypal/checkout-server-sdk';
 require('dotenv').config()
-require('https').globalAgent.options.ca = require('ssl-root-cas/latest').create();
+//require('https').globalAgent.options.ca = require('ssl-root-cas/latest').create();
 /**
 * @see https://github.com/paypal/Checkout-NodeJS-SDK
 * @see https://developer.paypal.com/docs/api/orders/v2/
