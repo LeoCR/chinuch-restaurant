@@ -39,7 +39,7 @@ const expressSecretKey=process.env.EXPRESS_SECRET_KEY;
 const fbOpts={
   clientID: process.env.FACEBOOK_CLIENT_ID,
   clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-  callbackURL: "https://localhost:48452/auth/facebook/callback",
+  callbackURL: "https://leonardoaranibar.co.cr:48452/auth/facebook/callback",
   enableProof: true,
   profileFields: ['id', 'displayName', 'photos', 'emails','first_name', 'last_name']
 };
@@ -219,8 +219,8 @@ app.post('/api/pay-with-paypal',async(req,res)=>{
   request.requestBody({
       "intent": "CAPTURE",
       "application_context": {
-          "return_url": "https://localhost:48452/paypal/payment/success",
-          "cancel_url": "https://localhost:48452/paypal/cancel",
+          "return_url": "https://leonardoaranibar.co.cr:48452/paypal/payment/success",
+          "cancel_url": "https://leonardoaranibar.co.cr:48452/paypal/cancel",
           "brand_name": "React Redux Node-JS Restaurant",
           "locale": "en-US",
           "landing_page": "BILLING",
@@ -429,7 +429,7 @@ app.get(['/app.js','/user/profile/app.js','/user/history/app.js',,'/paypal/payme
 
 //Sync Database
 models.sequelize.sync().then(function() {
-  console.log('https://localhost:48452 works')
+  console.log('https://leonardoaranibar.co.cr:48452 works')
 }).catch(function(err) {
   console.log(err, "Something went wrong with the Database Update!")
 });
@@ -448,5 +448,5 @@ https.createServer(httpsOptions,app, (req, res) => {
     'Expires':-1
   })
   res.writeHead(200); 
-  console.log('https://localhost:48452 !');
+  console.log('https://leonardoaranibar.co.cr !');
 }).listen(48452);
