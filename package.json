@@ -6,7 +6,8 @@
   "scripts": {
     "rebuild": "webpack --config webpack.config.js",
     "dev": "webpack --mode development --config webpack.config.js",
-    "start": "babel-node server.js"
+    "start": "pm2 start npm -- run server",
+    "server": "babel-node server.js"
   },
   "author": "leonardoAranibarSanchez",
   "license": "ISC",
