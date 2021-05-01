@@ -3,21 +3,21 @@ db = require(path.resolve(__dirname+'/../config/config.js')),
 sequelize=db.sequelize,
 Dish = db.dish;
 exports.getMainCourses=(req,res)=>{
-	var sqlGetMainCourses="SELECT * FROM dish WHERE category='Main Course';";
+	const sqlGetMainCourses="SELECT * FROM dish WHERE category='Main Course';";
     sequelize.query(sqlGetMainCourses, { type: sequelize.QueryTypes.SELECT})
     .then(user => {
                 res.send(user);     
     })
 }
 exports.getAppetizers=(req,res)=>{
-	var sqlGetMainCourses="SELECT * FROM dish WHERE category='Appetizer';";
+	const sqlGetMainCourses="SELECT * FROM dish WHERE category='Appetizer';";
     sequelize.query(sqlGetMainCourses, { type: sequelize.QueryTypes.SELECT})
     .then(user => {
                 res.send(user);     
     })
 }
 exports.getDesserts=(req,res)=>{
-	var sqlGetMainCourses="SELECT * FROM dish WHERE category='Dessert';";
+	const sqlGetMainCourses="SELECT * FROM dish WHERE category='Dessert';";
     sequelize.query(sqlGetMainCourses, { type: sequelize.QueryTypes.SELECT})
     .then(user => {
                 res.send(user);     

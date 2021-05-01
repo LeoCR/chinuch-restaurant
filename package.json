@@ -42,6 +42,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "file-loader": "^4.3.0",
+    "googleapis": "^72.0.0",
     "history": "^4.10.1",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",

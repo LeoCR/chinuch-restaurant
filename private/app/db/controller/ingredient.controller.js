@@ -21,7 +21,7 @@ exports.findById = (req, res) => {
 	});
 };
 exports.getIngredientsByDish=(req,res)=>{
-	var sqlFindIngredientsByDish="SELECT ingredient_dish.id_ingredient_dish,ingredient_dish.id_ingredient, "+
+	const sqlFindIngredientsByDish="SELECT ingredient_dish.id_ingredient_dish,ingredient_dish.id_ingredient, "+
 	" ingredient_dish.id_dish,ingredient.name,ingredient.img FROM ingredient_dish "+
 	" INNER JOIN  ingredient ON ingredient.id=ingredient_dish.id_ingredient WHERE ingredient_dish.id_dish='" +req.params.idDish+"' ;";
 	sequelize.query(sqlFindIngredientsByDish, { type: sequelize.QueryTypes.SELECT})

@@ -1,7 +1,7 @@
 const path = require('path'), 
 db = require(path.resolve(__dirname+'/../config/config.js')),
 User = db.user;
-var bCrypt = require('bcrypt-nodejs');
+const bCrypt = require('bcrypt-nodejs');
 exports.findAll=(req,res)=>{
     User.findAll().then(user => {
         res.send(user);
@@ -29,11 +29,11 @@ exports.findById = (req, res) => {
 		res.status(500).json({msg: "An error occurred.", details: err});
 	});
 };
-var generateHash = function(password) {
+const generateHash = function(password) {
         return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
 };
 exports.update=(req,res)=>{
-    var userPassword = generateHash(req.body.password);
+    const userPassword = generateHash(req.body.password);
     User.update({  
         id: req.body.id,
         firstname: req.body.firstname,
@@ -50,7 +50,7 @@ exports.update=(req,res)=>{
   });
 }
 exports.create=(req,res)=>{
-    var userPassword = generateHash(req.body.password);
+    const userPassword = generateHash(req.body.password);
     User.create({  
         id: req.body.id,
         firstname: req.body.firstname,
