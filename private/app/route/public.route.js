@@ -36,11 +36,11 @@ module.exports = function (app, express, path, isLoggedIn) {
       req.body.email !== "" &&
       req.body.comment !== ""
     ) {
-      var message = "<h4>Full Name:</h4><p>" + req.body.fullName + "</p>";
+      let message = "<h4>Full Name:</h4><p>" + req.body.fullName + "</p>";
       message += "<h4>Telephone:</h4><p>" + req.body.phoneNumber + "</p>";
       message += "<h4>Email:</h4><p>" + req.body.email + "</p>";
       message += "<h4>Comment:</h4><p>" + req.body.comment + "</p>";
-      var mailOptions = {
+      const mailOptions = {
         from: "restaurantnodejscr@gmail.com",
         to: "laranibarsanchez@gmail.com",
         subject: "Restaurant Contact Form",
